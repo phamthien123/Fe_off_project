@@ -10,6 +10,7 @@ $.getJSON( API_PREFIX + "categories_news", function( data ) {
     elmAreaCategoryNews.html(xhtml);
 });
 
+
 //urlParam Category
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -43,3 +44,29 @@ $.getJSON(API_PREFIX + `categories_news/${categories_id}/articles?offset=0&limit
     });
     elmAreaCategoryItems.html(xhtml);
 });
+
+//Giá Vàng
+$.getJSON( "http://apiforlearning.zendvn.com/api/get-gold", function( data ) {
+  let xhtml = ``
+  $.each( data, function( key, val ) {
+        xhtml += `
+        <tr>        
+        <td>${val.type}</td>
+        <td>${val.buy}</td>
+        <td>${val.sell}</td> </tr>`
+       $("#table-api").html(xhtml)
+     })
+  });
+
+//Giá Coins
+$.getJSON("http://apiforlearning.zendvn.com/api/get-coin", function( data ) {
+  let xhtml = ``
+  $.each( data, function( key, val ) {
+        xhtml += `
+        <tr>        
+        <td>${val.name}</td>
+        <td>${val.price}</td>
+        <td>${val.percent_change_24h} %</td> </tr>`
+       $("#table-Coins").html(xhtml)
+     })
+  });
