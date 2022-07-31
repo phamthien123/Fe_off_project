@@ -33,3 +33,5 @@ addItem = (id,name,thumb,link) => {
     saveStorage(items);
     return items;
 }
+
+

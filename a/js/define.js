@@ -10,6 +10,8 @@ let trending_right1 = $("#trending_right1");
 
 let trending_random = $("#trending_random");
 
+
+
 let arrCategoryInHome   = [1,5,6,12]; 
 let Area_left_content = $("#Area-left-content");
 

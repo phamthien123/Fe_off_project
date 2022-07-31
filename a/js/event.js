@@ -12,6 +12,5 @@ funcDeleteArticleViewed= (id) => {
     } 
 }
 
-funcHeart= (id) => {
-    
-}
+
+

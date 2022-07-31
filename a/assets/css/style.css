@@ -2955,7 +2955,7 @@ hr {
 .about-area2 .whats-right-single .whats-right-img img,
 .contact-section .whats-right-single .whats-right-img img {
   border-radius: 6px;
-  width: 90%;
+  width: 150px;
 }
 @media (max-width: 575px) {
   .whats-news-area .whats-right-single .whats-right-img img,

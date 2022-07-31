@@ -24,3 +24,7 @@ showCategoryDetail();
  // Hiển thị bài viết đã xem
  let data = listItems();
  showArticleViewed(data);
+
+  // Hiển thị bài viết đã xem
+  let heart = listItems();
+  showArticleHeart(heart);

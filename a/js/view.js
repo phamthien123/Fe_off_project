@@ -162,15 +162,15 @@ showRandom = (total) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
-        xhtml += `<div class="weekly2-single" >
-            <div class="weekly2-img" >
-                <img src="${val.thumb}" alt="">
-            </div>
-            <div class="weekly2-caption">
-                <h4><a href="#">${val.title}</a></h4>
-                <p>${val.publish_date}</p>
-            </div>
-        </div>`;
+        xhtml += `  <div class="weekly2-single">
+        <div class="weekly2-img">
+            <img src="${val.thumb}" alt="">
+        </div>
+        <div class="weekly2-caption">
+            <h4><a href="#">Scarlett’s disappointment at latest accolade</a></h4>
+            <p>Jhon  |  2 hours ago</p>
+        </div>
+    </div> `;
       });
       trending_random.html(xhtml);
     }
@@ -188,39 +188,47 @@ showCategoryDetail = () => {
         <h3>${data[0].category.name }</h3>
     </div> `;
         $.each(data, function (key, val) {
-          xhtml += `
+          xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
           <div class="row">
-          <div class="col-xl-6 col-lg-12" >
-          <div class="whats-news-single mb-40 mb-40">
-              <div class="whates-img">
-                  <img src="${val.thumb}" alt="">
+              <!-- Left Details Caption -->
+              <div class="col-xl-6 col-lg-12">
+                  <div class="whats-news-single mb-40 mb-40">
+                      <div class="whates-img">
+                          <img src="${val.thumb}" alt="">
+                      </div>
+                      <div class="whates-caption">
+                          <h4><a href="latest_news.html">${val.title}</a></h4>
+                          <span>${val.publish_date}</span>
+                          <p>${val.description}</p>
+                      </div>
+                  </div>
               </div>
-              <div class="whates-caption">
-                  <h4><a href="${val.link}" target="_blank">${val.title}</a></h4>
-                  <h4><a href="#" onClick="funcHeart('${val.id}')"><i class="fa-solid fa-heart heart" style="font-size: 30px"></i></a></h4>
-                  <span>${val.publish_date}</span>
-                  <p>${val.description}</p>
-              </div>
-          </div>
-      </div> `;                  
+              
+          `;                  
         $.getJSON(
                   API_PREFIX +
                       `categories_news/${value}/articles?offset=4&limit=1&sort_by=id&sort_dir=desc`,
                       function (data) {
                             $.each(data, function (key, val) {
-                                  xhtml +=`<div class="col-xl-6 col-lg-12" >
-                                  <div class="whats-news-single mb-40 mb-40">
-                                      <div class="whates-img">
-                                          <img src="${val.thumb}" alt="">
-                                      </div>
-                                      <div class="whates-caption">
-                                          <h4><a href="${val.link}" target="_blank">${val.title}</a></h4>
-                                          <h4><a href="#" onClick="funcHeart('${val.id}')"><i class="fa-solid fa-heart heart" style="font-size: 30px"></i></a></h4>
-                                          <span>${val.publish_date}</span>
-                                          <p>${val.description}</p>
+                                  xhtml +=` <!-- Right single caption -->
+                                  <div class="col-xl-6 col-lg-12">
+                                      <div class="row">
+                                          <!-- single -->
+                                          <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                                              <div class="whats-right-single mb-20">
+                                                  <div class="whats-right-img">
+                                                      <img src="${val.thumb}" alt="">
+                                                  </div>
+                                                  <div class="whats-right-cap">
+                                                  <span></span>
+                                                      <h4><a href="latest_news.html">${val.title}</a></h4>
+                                                      <p>Jun 19, 2020</p> 
+                                                  </div>
+                                              </div>
+                                          </div>
                                       </div>
                                   </div>
-                              </div>    
+                              </div>
                           </div>`;
                       });
               Area_left_content.after(xhtml);
@@ -230,6 +238,7 @@ showCategoryDetail = () => {
     );
   });
 }
+
 // Đổ danh sách bài viết đã xem
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
@@ -243,13 +252,15 @@ showArticleViewed = (data) => {
               <img src="${val.thumb}" alt="">
           </div>
           <div class="weekly3-caption">
-              <h4><a href="${val.link} target="_blank>${val.name}</a></h4>
+              <h4><a href=" ${val.link}"target="_blank" >${val.name}</a></h4>
               <p>19 Jan 2020</p>  
           </div>
-          <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="post-cata cata-sm cata-success" style="color:red;font-size:20px"><i class="fa-solid fa-trash"></i></a>
+          <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="post-cata cata-sm cata-success" style="color:green;font-size:20px">Xóa</a>
   </div> 
       `; 
   });
   Article_viewed.after(xhtml);
 }
+
+
 
