@@ -12,3 +12,15 @@ showGold();
 
 //Giá Coins
 showCoin();
+
+showLatestArticle(1); 
+
+showRightArticle(2);
+
+showRandom(4);
+
+showCategoryDetail();
+
+ // Hiển thị bài viết đã xem
+ let data = listItems();
+ showArticleViewed(data);
