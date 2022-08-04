@@ -8,14 +8,14 @@ if(categoryID !== null) {
 }
 
 //Giá Vàng
-showGold();
+// showGold();
 
 //Giá Coins
-showCoin();
+// showCoin();
 
 showLatestArticle(1); 
 
-showRightArticle(2);
+showRightArticle(2)
 
 showRandom(4);
 
@@ -25,6 +25,7 @@ showCategoryDetail();
  let data = listItems();
  showArticleViewed(data);
 
-  // Hiển thị bài viết đã xem
-  let heart = listItems();
-  showArticleHeart(heart);
+ let data1 = listHearts();
+ showHeart(data1)
+
+//  showvideo();

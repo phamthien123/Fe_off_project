@@ -13,4 +13,18 @@ funcDeleteArticleViewed= (id) => {
 }
 
 
+funcHeart= (id, title, thumb, link,publish_date,description) => {
+    let items  = [];
+    items = addHeart(id, title, thumb, link,publish_date,description);
+    // showArticleViewed(); 
+}
+
+funcDeleteHeart= (id) => {
+    let text = "Bạn chắc chắn muốn bỏ yêu thích viết này";
+    if (confirm(text) == true) {
+        let items = deleteHeart(id);
+        showHeart(items);
+    } 
+}
+
 

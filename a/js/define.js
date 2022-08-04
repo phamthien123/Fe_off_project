@@ -17,4 +17,8 @@ let Area_left_content = $("#Area-left-content");
 
 let Article_viewed = $("#Article-viewed");
 
+let video_containers= $("#video-containers");
+
+let nav_tabContent= $("#nav_tabContent");
+
 const API_PREFIX = 'http://apiforlearning.zendvn.com/api/';

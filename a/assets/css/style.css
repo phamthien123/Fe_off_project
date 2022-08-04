@@ -95,6 +95,15 @@ table {
     border-radius: 10px;
 } */
 
+.btn1{
+  color: white !important;
+  background: rgba(240, 7, 7, 0.692);
+  padding: 5px;
+  margin: 5px;
+}
+.img-res{
+  margin-top: 0px !important;
+}
 .boxed-btn:hover {
   background: #ff2143;
   color: #fff !important;
@@ -2670,6 +2679,14 @@ hr {
   bottom: 0;
   content: "";
 }
+#video-containers{
+  float: left;
+  width: 293px;
+  display: block;
+}
+.a_name:hover{
+  color: red !important;
+}
 .img-logo{
   width: 30%
 }
@@ -2684,6 +2701,7 @@ hr {
     left: 5px;
   }
 }
+
 .trending-area .trending-main .trending-top .trend-top-img .trend-top-cap span {
   color: #051441;
   padding: 7px 14px;
