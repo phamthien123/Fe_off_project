@@ -64,3 +64,41 @@ deleteHeart = (id) => {
   // xoá công việc trong items có id = id được truyền vào
   return items;
 }
+
+
+
+loadStorageVideo = () => {
+  return JSON.parse(localStorage.getItem("LIST_Video")) ;
+}
+
+saveStorageVideo = (items) => {
+  localStorage.setItem("LIST_Video", JSON.stringify(items));
+}
+      
+listVideos = () => {
+let items = loadStorageVideo() ;
+if(items === null) items = [];  // 
+return items;
+}
+
+addVideo = (id,name) => {
+  let taskNew = {id: id, name: name};
+  let items = listVideos();
+  items.push(taskNew);
+  // Lưu item vào storgare
+  saveStorageVideo(items);
+  return items;
+}
+
+deleteVideo = (id) => {
+  console.log(id);
+  let items = listVideos();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
+  items = items.filter(item => item.id !== id);
+  saveStorageVideo(items);
+  // xoá công việc trong items có id = id được truyền vào
+  return items;
+}
+
+funcSearch = () =>{
+  
+}

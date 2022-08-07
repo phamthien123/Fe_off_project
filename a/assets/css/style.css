@@ -323,7 +323,7 @@ hr {
   opacity: 0.5;
 }
 .section-padding {
-  padding-top: 120px;
+  padding-top: 50px;
   padding-bottom: 120px;
 }
 .separator {
@@ -475,6 +475,7 @@ hr {
 .hero-btn {
   padding: 30px 56px;
 }
+
 .border-btn {
   background: none;
   -moz-user-select: none;
@@ -1886,13 +1887,20 @@ hr {
     padding-bottom: 28px;
   }
 }
+.fa-heart{
+  margin-left: 10px;
+}
+.fa-heart:hover{
+  color: red;
+}
 .video-padding {
   padding-top: 100px;
   padding-bottom: 45px;
+  padding-left: 70px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .video-padding {
-    padding-top: 100px;
+    padding-top: 30px;
     padding-bottom: 45px;
   }
 }
@@ -2679,11 +2687,8 @@ hr {
   bottom: 0;
   content: "";
 }
-#video-containers{
-  float: left;
-  width: 293px;
-  display: block;
-}
+
+
 .a_name:hover{
   color: red !important;
 }
@@ -2701,7 +2706,9 @@ hr {
     left: 5px;
   }
 }
-
+.text-h4{
+  font-size: 12px !important;
+}
 .trending-area .trending-main .trending-top .trend-top-img .trend-top-cap span {
   color: #051441;
   padding: 7px 14px;
@@ -3543,7 +3550,7 @@ hr {
   right: 37px;
 }
 .youtube-area {
-  background: #f4f4f4;
+  background: #e5e7eb;
 }
 .youtube-area .video-items video {
   width: 100%;
@@ -3566,10 +3573,22 @@ hr {
   font-weight: 600;
   font-size: 11px;
 }
+.video-content{
+  display: flex !important;
+  flex-wrap: wrap;
+  flex: 1 1 20%;
+}
+.main-video-content{
+  display: flex !important;
+  flex-wrap: wrap;
+  flex: 1 1 20%;
+}
 .youtube-area .single-video video {
   padding: 0 5px;
-  width: 100%;
+  width: 280px;
+  margin: 5px;
 }
+
 .youtube-area .single-video .video-intro h4 {
   font-size: 15px;
   font-weight: 500;
@@ -3593,13 +3612,17 @@ hr {
   border-radius: 6px;
   width: 100%;
 }
+.what-img{
+  margin-right: 60px !important;
+}
 .recent-articles .single-recent .what-cap {
-  padding: 20px 20px 10px 10px;
+  padding: 12px;
   background: #fff;
   position: absolute;
-  bottom: 0px;
+  bottom: 12px;
   left: 0;
-  width: 80%;
+  width: 250px;
+  height: 60px;
   border-radius: 0 7px 0 0;
   -webkit-transition: all 0.4s ease-out 0s;
   -moz-transition: all 0.4s ease-out 0s;

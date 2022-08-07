@@ -8,14 +8,15 @@ if(categoryID !== null) {
 }
 
 //Giá Vàng
-// showGold();
+showGold();
 
 //Giá Coins
-// showCoin();
+showCoin();
 
 showLatestArticle(1); 
 
 showRightArticle(2)
+
 
 showRandom(4);
 
@@ -28,4 +29,10 @@ showCategoryDetail();
  let data1 = listHearts();
  showHeart(data1)
 
-//  showvideo();
+ showvideo();
+
+ showAllVideo();
+
+
+ let video = listVideos();
+ showHeartVideo(video)

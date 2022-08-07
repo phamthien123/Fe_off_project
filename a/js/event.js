@@ -27,4 +27,17 @@ funcDeleteHeart= (id) => {
     } 
 }
 
+funcLikeVideo= (id, title) => {
+    let items  = [];
+    items = addVideo(id, title);
+    // showArticleViewed(); 
+}
 
+
+funcDeleteVideo= (id) => {
+    let text = "Bạn chắc chắn muốn bỏ yêu thích viết này";
+    if (confirm(text) == true) {
+        let items = deleteVideo(id);
+        showHeartVideo(items);
+    } 
+}
