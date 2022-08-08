@@ -37,7 +37,22 @@ showArticleInCategory = (categoryID) => {
 };
 
 
-
+showListCategories = () => {
+  $.getJSON(API_PREFIX + "categories_news", function (data) {
+    let xhtml = "";
+    $.each(data, function (key, val) {
+      xhtml += `
+      <ul class="list cat-list">
+      <li>
+          <a href="#" class="d-flex">
+              <p><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
+          </a>
+      </li>
+  </ul>`;
+    });
+    List_category.html(xhtml);
+  });
+};
 
 
 showGold = () => {
@@ -48,8 +63,8 @@ showGold = () => {
               <tr>        
               <td>${val.type}</td>
               <td>${val.buy}</td>
-              <td>${ val.sell}</td> 
-              </tr>`;  
+              <td>${val.sell}</td> 
+              </tr>`;
       $("#table-api").html(xhtml);
     });
   });
@@ -94,9 +109,11 @@ showLatestArticle = (total) => {
 
 showRightArticle = (total) => {
   // Đổ dữ liệu ra category news
-  $.getJSON( API_PREFIX + `articles?offset=6&limit=${total}&sort_by=id&sort_dir=desc`, function( data ) {
-    let xhtml = '';
-    
+  $.getJSON(
+    API_PREFIX + `articles?offset=6&limit=${total}&sort_by=id&sort_dir=desc`,
+    function (data) {
+      let xhtml = "";
+
       $.each(data, function (key, val) {
         xhtml += `<div class="trend-top-img">
             <img src="${val.thumb}" alt="">
@@ -143,16 +160,16 @@ showCategoryDetail = () => {
         `categories_news/${value}/articles?offset=3&limit=1&sort_by=id&sort_dir=desc`,
       function (data) {
         xhtml = `<div class="section-tittle mb-30">
-        <h3>${data[0].category.name }</h3>
+        <h3>${data[0].category.name}</h3>
     </div> `;
         $.each(data, function (key, val) {
-          xhtml += `  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
+          xhtml += ` <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
           <div class="row">
               <!-- Left Details Caption -->
               <div class="col-xl-6 col-lg-12">
                   <div class="whats-news-single mb-40 mb-40">
                       <div class="whates-img">
-                          <img src="${val.thumb}" alt="">
+                          <img src="/assets/img/gallery/aaaaa.jpg" alt="">
                       </div>
                       <div class="whates-caption">
                           <h4><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h4>
@@ -166,7 +183,31 @@ showCategoryDetail = () => {
                       <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
                           <div class="whats-right-single mb-20">
                               <div class="whats-right-img">
-                                  <img src="${val.thumb}" alt="">
+                                  <img src="/assets/img/gallery/aaaaa.jpg" alt="">
+                              </div>
+                              <div class="whats-right-cap">
+                                  <span class="colorb">FASHION</span>
+                                  <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                  <p>Jun 19, 2020<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                          <div class="whats-right-single mb-20">
+                              <div class="whats-right-img">
+                                  <img src="/assets/img/gallery/aaaaa.jpg" alt="">
+                              </div>
+                              <div class="whats-right-cap">
+                                  <span class="colorb">FASHION</span>
+                                  <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                  <p>Jun 19, 2020<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                          <div class="whats-right-single mb-20">
+                              <div class="whats-right-img">
+                                  <img src="/assets/img/gallery/aaaaa.jpg" alt="">
                               </div>
                               <div class="whats-right-cap">
                                   <span class="colorb">FASHION</span>
@@ -179,20 +220,20 @@ showCategoryDetail = () => {
               </div>
           </div>
       </div>`;
-                    });
-                     Area_left_content.after(xhtml);  
-                 })
-             })
-        }
-   
+        });
+        Area_left_content.after(xhtml);
+      }
+    );
+  });
+};
 // Đổ danh sách bài viết đã xem
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
-  Article_viewed.nextAll('div').remove();
-  
-  let xhtml = '';
-  $.each( data, function( key, val ) {
-      xhtml += `<div class="weekly3-news-active dot-style d-flex" >
+  Article_viewed.nextAll("div").remove();
+
+  let xhtml = "";
+  $.each(data, function (key, val) {
+    xhtml += `<div class="weekly3-news-active dot-style d-flex" >
       <div class="weekly3-single">
           <div class="weekly3-img">
               <img src="${val.thumb}" alt="">
@@ -203,16 +244,16 @@ showArticleViewed = (data) => {
           </div>
           <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="post-cata cata-sm cata-success" style="color:green;font-size:20px">Xóa</a>
   </div> 
-      `; 
+      `;
   });
   Article_viewed.after(xhtml);
-}
+};
 
 showHeart = (data) => {
   // Đổ dữ liệu ra category news
-  let xhtml = '';
-  $.each( data, function( key, val ) {
-      xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
+  let xhtml = "";
+  $.each(data, function (key, val) {
+    xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
       <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6">
               <div class="whats-news-single mb-40 mb-40">
@@ -232,16 +273,16 @@ showHeart = (data) => {
         </div> 
       </div>
   </div> 
-      `; 
+      `;
   });
   nav_tabContent.after(xhtml);
-}
+};
 
 showHeartVideo = (data) => {
   // Đổ dữ liệu ra category news
-  let xhtml = '';
-  $.each( data, function( key, val ) {
-      xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
+  let xhtml = "";
+  $.each(data, function (key, val) {
+    xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
       <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6">
               <div class="whats-news-single mb-40 mb-40">
@@ -260,55 +301,53 @@ showHeartVideo = (data) => {
         </div> 
       </div>
   </div> 
-      `; 
+      `;
   });
   nav_Video.after(xhtml);
-}
+};
 
 showvideo = () => {
   // Đổ dữ liệu ra category news
-  $.getJSON(`http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
+  $.getJSON(
+    `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
         let title = val.title;
-        let results = title.slice(18,48) 
-        xhtml +=  `<div class="single-video">
+        let results = title.slice(18, 48);
+        xhtml += `<div class="single-video">
         <video controls>
             <source src="assets/video/news1.mp4" type="video/mp4">
         </video>
         <div class="video-intro">
             <h4>${results} <a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h4>
         </div>
-    </div>`
-      })
+    </div>`;
+      });
       video_containers.after(xhtml);
-    })
-  }
+    }
+  );
+};
 
 showAllVideo = () => {
-    // Đổ dữ liệu ra category news
-    $.getJSON(`http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=8&sort_by=id&sort_dir=asc`,
-      function (data) {
-        let xhtml = "";
-        $.each(data, function (key, val) {
-          let title = val.title;
-          let results = title.slice(18,48) 
-          xhtml +=  ` <div class="single-video">
+  // Đổ dữ liệu ra category news
+  $.getJSON(
+    `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=8&sort_by=id&sort_dir=asc`,
+    function (data) {
+      let xhtml = "";
+      $.each(data, function (key, val) {
+        let title = val.title;
+        let results = title.slice(18, 48);
+        xhtml += ` <div class="single-video">
           <video controls>
               <source src="assets/video/news1.mp4" type="video/mp4">
           </video>
           <div class="video-intro">
           <h4>${results} <a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h4>
           </div>
-      </div>` 
-        })
-        allVideo.after(xhtml);
-      })
+      </div>`;
+      });
+      allVideo.after(xhtml);
     }
-
-
-
-
-
-
+  );
+};

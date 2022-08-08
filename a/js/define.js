@@ -16,6 +16,8 @@ let arrCategoryInHome   = [1,5,6,12];
 
 let Area_left_content = $("#Area-left-content");
 
+
+
 let Article_viewed = $("#Article-viewed");
 
 let video_containers= $("#video-containers");
@@ -27,6 +29,6 @@ let allVideo= $("#allVideo");
 
 let nav_Video= $("#nav-Video");
 
-let Seach_item= $("#Seach_item");
+let List_category = $("#List_category");
 
 const API_PREFIX = 'http://apiforlearning.zendvn.com/api/';

@@ -13,11 +13,9 @@ listItems = () => {
 }
 
 deleteItem = (id) => {
-  console.log(id);
   let items = listItems();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
   items = items.filter(item => item.id !== id);
   saveStorage(items);
-  // xoá công việc trong items có id = id được truyền vào
   return items;
 }
 
@@ -51,19 +49,17 @@ addHeart = (id,name,thumb,link,publish_date,description) => {
   let taskNew = {id: id, name: name,thumb:thumb ,link: link,publish_date:publish_date, description: description};
   let items = listHearts();
   items.push(taskNew);
-  // Lưu item vào storgare
   saveStorageHeart(items);
   return items;
 }
 
 deleteHeart = (id) => {
-  console.log(id);
   let items = listHearts();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
   items = items.filter(item => item.id !== id);
   saveStorageHeart(items);
-  // xoá công việc trong items có id = id được truyền vào
   return items;
 }
+
 
 
 
@@ -85,7 +81,6 @@ addVideo = (id,name) => {
   let taskNew = {id: id, name: name};
   let items = listVideos();
   items.push(taskNew);
-  // Lưu item vào storgare
   saveStorageVideo(items);
   return items;
 }
@@ -95,7 +90,6 @@ deleteVideo = (id) => {
   let items = listVideos();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
   items = items.filter(item => item.id !== id);
   saveStorageVideo(items);
-  // xoá công việc trong items có id = id được truyền vào
   return items;
 }
 

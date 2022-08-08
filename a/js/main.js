@@ -22,6 +22,8 @@ showRandom(4);
 
 showCategoryDetail();
 
+showListCategories();  
+
  // Hiển thị bài viết đã xem
  let data = listItems();
  showArticleViewed(data);
