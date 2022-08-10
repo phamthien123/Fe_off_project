@@ -36,7 +36,6 @@ showArticleInCategory = (categoryID) => {
   );
 };
 
-
 showListCategories = () => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
@@ -53,7 +52,6 @@ showListCategories = () => {
     List_category.html(xhtml);
   });
 };
-
 
 showGold = () => {
   $.getJSON("http://apiforlearning.zendvn.com/api/get-gold", function (data) {
@@ -157,75 +155,58 @@ showCategoryDetail = () => {
     let xhtml = ``;
     $.getJSON(
       API_PREFIX +
-        `categories_news/${value}/articles?offset=3&limit=1&sort_by=id&sort_dir=desc`,
+        `categories_news/${value}/articles?offset=3&limit=3&sort_by=id&sort_dir=desc`,
       function (data) {
         xhtml = `<div class="section-tittle mb-30">
         <h3>${data[0].category.name}</h3>
-    </div> `;
+    </div>
+     `;
+     let aricalRight ="";
         $.each(data, function (key, val) {
-          xhtml += ` <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
+          aricalRight += `
+            <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                <div class="whats-right-single mb-20">
+                      <div class="whats-right-img">
+                              <img src="${val.thumb}" alt="">
+                      </div>
+                      <div class="whats-right-cap">
+                              <h4><a href="latest_news.html">${val.title}</a></h4>
+                              <br/>
+                              <p>${val.publish_date}<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
+                      </div>
+                  </div>
+            </div>`;
+});
+xhtml +=`
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
           <div class="row">
-              <!-- Left Details Caption -->
-              <div class="col-xl-6 col-lg-12">
-                  <div class="whats-news-single mb-40 mb-40">
-                      <div class="whates-img">
-                          <img src="/assets/img/gallery/aaaaa.jpg" alt="">
-                      </div>
-                      <div class="whates-caption">
-                          <h4><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h4>
-                          <p>Jun 19, 2020<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
-                          <p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>
-                      </div>
-                  </div>
+            <div class="col-xl-6 col-lg-12">
+              <div class="whats-news-single mb-40 mb-40">
+                    <div class="whates-img">
+                        <img src="${data[0].thumb}" alt="">
+                    </div>
+                    <div class="whates-caption">
+                        <h4><a href="!#">${data[0].title}</a></h4>
+                        <p>${data[0].publish_date}<a href="!#" class="btn1" onClick="funcHeart('${data[0].id}', '${data[0].title}', '${data[0].thumb}', '${data[0].link}','${data[0].publish_date}','${data[0].description}')">Yêu thích</a></p> 
+                        <p>${data[0].description}</p>
+                    </div>
               </div>
-              <div class="col-xl-6 col-lg-12">
-                  <div class="row">
-                      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                          <div class="whats-right-single mb-20">
-                              <div class="whats-right-img">
-                                  <img src="/assets/img/gallery/aaaaa.jpg" alt="">
-                              </div>
-                              <div class="whats-right-cap">
-                                  <span class="colorb">FASHION</span>
-                                  <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                  <p>Jun 19, 2020<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                          <div class="whats-right-single mb-20">
-                              <div class="whats-right-img">
-                                  <img src="/assets/img/gallery/aaaaa.jpg" alt="">
-                              </div>
-                              <div class="whats-right-cap">
-                                  <span class="colorb">FASHION</span>
-                                  <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                  <p>Jun 19, 2020<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                          <div class="whats-right-single mb-20">
-                              <div class="whats-right-img">
-                                  <img src="/assets/img/gallery/aaaaa.jpg" alt="">
-                              </div>
-                              <div class="whats-right-cap">
-                                  <span class="colorb">FASHION</span>
-                                  <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                  <p>Jun 19, 2020<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            </div>
+            <div class="col-xl-6 col-lg-12">
+                    <div class="row">
+            `+(aricalRight)+`
+            </div>
+            </div>
           </div>
-      </div>`;
-        });
-        Area_left_content.after(xhtml);
-      }
-    );
-  });
-};
+        </div>`;
+                Area_left_content.after(xhtml);
+              }
+            );
+          });
+        };
+
+
+
 // Đổ danh sách bài viết đã xem
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
@@ -332,7 +313,7 @@ showvideo = () => {
 showAllVideo = () => {
   // Đổ dữ liệu ra category news
   $.getJSON(
-    `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=8&sort_by=id&sort_dir=asc`,
+    `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
@@ -341,6 +322,14 @@ showAllVideo = () => {
         xhtml += ` <div class="single-video">
           <video controls>
               <source src="assets/video/news1.mp4" type="video/mp4">
+          </video>
+          <div class="video-intro">
+          <h4>${results} <a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h4>
+          </div>
+      </div>
+      <div class="single-video">
+          <video controls>
+              <source src="assets/video/news2.mp4" type="video/mp4">
           </video>
           <div class="video-intro">
           <h4>${results} <a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h4>

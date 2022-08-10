@@ -475,7 +475,6 @@ hr {
 .hero-btn {
   padding: 30px 56px;
 }
-
 .border-btn {
   background: none;
   -moz-user-select: none;
@@ -3023,6 +3022,7 @@ hr {
 .contact-section .whats-right-single .whats-right-cap h4 {
   font-size: 16px;
   font-weight: 700;
+  margin: 25px 0 0 0;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .whats-news-area .whats-right-single .whats-right-cap h4,

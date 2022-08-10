@@ -6989,10 +6989,10 @@ button.bg-dark:hover {
 }
 .p-4 {
   padding: 2.5rem !important;
-  background: linear-gradient(#e66465, #9198e5);
   border-radius: 10px;
-  margin-top: 30px;
-  padding: 10px;
+  background-image: url("/assets/img/blog/tp_hcm_123_tcch.jpg");
+  height: 320px;
+  background-repeat: no-repeat;
 }
 .pt-4,
 .py-4 {
@@ -8197,7 +8197,9 @@ a.text-dark:hover {
   color: #212529 !important;
 }
 .text-muted {
-  color: white !important;
+  color: black !important;
+  font-size: 20px;
+  font-weight: bold;
 }
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important;
