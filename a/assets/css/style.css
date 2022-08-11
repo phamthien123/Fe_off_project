@@ -3065,6 +3065,7 @@ hr {
   border-radius: 7px;
   margin-top: 100px;
 }
+
 .whats-news-area .single-follow .single-box,
 .about-area2 .single-follow .single-box,
 .contact-section .single-follow .single-box {
@@ -3072,6 +3073,7 @@ hr {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 .whats-news-area .single-follow .follow-us,
 .about-area2 .single-follow .follow-us,
 .contact-section .single-follow .follow-us {
@@ -4453,7 +4455,7 @@ hr {
 }
 @media (min-width: 768px) {
   .blog_details {
-    padding: 60px 30px 35px 35px;
+    padding: 30px 30px 35px 35px;
   }
 }
 .blog_details p {

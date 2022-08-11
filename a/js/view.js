@@ -15,6 +15,7 @@ showArticleInCategory = (categoryID) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
+        let ShowDate =  new Date(val.publish_date);
         xhtml += `<article class="blog_item" >
             <div class="blog_item_img">
             <img class="card-img rounded-0" src="${val.thumb}" alt="">
@@ -23,10 +24,10 @@ showArticleInCategory = (categoryID) => {
             <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank" >
                 <h2>${val.title}</h2>
             </a>
-            <p>${val.description}<a href="#" class="btn1">Yêu thích</a></p>
+            <p>${val.description}<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p>
             <ul class="blog-info-link">
                 <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                <li><a href="#"><i class="fa fa-calendar-check"></i> 26/07/2022</a></li> 
+                <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}</a></li> 
             </ul>
         </div>
         </article>`;
@@ -84,21 +85,23 @@ showCoin = () => {
 };
 
 showLatestArticle = (total) => {
+ 
   // Đổ dữ liệu ra category news
   $.getJSON(
     API_PREFIX + `articles?offset=5&limit=${total}&sort_by=id&sort_dir=desc`,
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
+        let ShowDate =  new Date(val.publish_date);
+        ShowDate.toLocaleDateString();
         xhtml += `<div class="trend-top-img">
                            <img src="${val.thumb}" alt="">
                            <div class="trend-top-cap">
                                <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">${val.category.name}</span>
                               <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${val.title}</a></h2>
-                               <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">${val.publish_date}</p>
-                           </div>
-                       </div>
-                       `;
+                               <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">${ShowDate.toLocaleDateString()}</p>
+                      </div>
+                  </div>`;
       });
       elmAreaTrendingNew.html(xhtml);
     }
@@ -111,17 +114,16 @@ showRightArticle = (total) => {
     API_PREFIX + `articles?offset=6&limit=${total}&sort_by=id&sort_dir=desc`,
     function (data) {
       let xhtml = "";
-
       $.each(data, function (key, val) {
+        let ShowDate =  new Date(val.publish_date);
         xhtml += `<div class="trend-top-img">
             <img src="${val.thumb}" alt="">
             <div class="trend-top-cap trend-top-cap2">
                 <span class="bgb">${val.category.name}</span>
                 <h2><a href="latest_news.html">${val.title}</a></h2>
-                <p>${val.publish_date}  </p>
+                <p>${ShowDate.toLocaleDateString()}</p>
             </div>
-        </div>
-                       `;
+        </div> `;
       });
       trending_right.html(xhtml);
     }
@@ -135,13 +137,14 @@ showRandom = (total) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
+        let ShowDate =  new Date(val.publish_date);
         xhtml += `  <div class="weekly2-single">
         <div class="weekly2-img">
             <img src="${val.thumb}" alt="">
         </div>
         <div class="weekly2-caption">
             <h4><a href="#">${val.title}</a></h4>
-            <p>${val.publish_date}</p>
+            <p>${ShowDate.toLocaleDateString()}</p>
         </div>
     </div> `;
       });
@@ -163,6 +166,7 @@ showCategoryDetail = () => {
      `;
      let aricalRight ="";
         $.each(data, function (key, val) {
+          let ShowDate =  new Date(val.publish_date);
           aricalRight += `
             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
                 <div class="whats-right-single mb-20">
@@ -172,11 +176,12 @@ showCategoryDetail = () => {
                       <div class="whats-right-cap">
                               <h4><a href="latest_news.html">${val.title}</a></h4>
                               <br/>
-                              <p>${val.publish_date}<a href="index.html" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p> 
+                              <p>${ShowDate.toLocaleDateString()}</p> 
                       </div>
                   </div>
             </div>`;
 });
+let ShowDate1 =  new Date(data[0].publish_date);
 xhtml +=`
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
           <div class="row">
@@ -187,7 +192,7 @@ xhtml +=`
                     </div>
                     <div class="whates-caption">
                         <h4><a href="!#">${data[0].title}</a></h4>
-                        <p>${data[0].publish_date}<a href="!#" class="btn1" onClick="funcHeart('${data[0].id}', '${data[0].title}', '${data[0].thumb}', '${data[0].link}','${data[0].publish_date}','${data[0].description}')">Yêu thích</a></p> 
+                        <p>${ShowDate1.toLocaleDateString()}</p> 
                         <p>${data[0].description}</p>
                     </div>
               </div>

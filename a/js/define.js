@@ -31,4 +31,6 @@ let nav_Video= $("#nav-Video");
 
 let List_category = $("#List_category");
 
+
+
 const API_PREFIX = 'http://apiforlearning.zendvn.com/api/';
