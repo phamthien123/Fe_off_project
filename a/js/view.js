@@ -120,7 +120,7 @@ showRightArticle = (total) => {
             <img src="${val.thumb}" alt="">
             <div class="trend-top-cap trend-top-cap2">
                 <span class="bgb">${val.category.name}</span>
-                <h2><a href="latest_news.html">${val.title}</a></h2>
+                <h2><a href="latest_news.html" class="titleright">${val.title}</a></h2>
                 <p>${ShowDate.toLocaleDateString()}</p>
             </div>
         </div> `;
@@ -158,7 +158,7 @@ showCategoryDetail = () => {
     let xhtml = ``;
     $.getJSON(
       API_PREFIX +
-        `categories_news/${value}/articles?offset=3&limit=3&sort_by=id&sort_dir=desc`,
+        `categories_news/${value}/articles?offset=7&limit=3&sort_by=id&sort_dir=desc`,
       function (data) {
         xhtml = `<div class="section-tittle mb-30">
         <h3>${data[0].category.name}</h3>
@@ -209,9 +209,6 @@ xhtml +=`
             );
           });
         };
-
-
-
 // Đổ danh sách bài viết đã xem
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
@@ -318,7 +315,7 @@ showvideo = () => {
 showAllVideo = () => {
   // Đổ dữ liệu ra category news
   $.getJSON(
-    `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
+    `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=8&sort_by=id&sort_dir=asc`,
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
@@ -332,13 +329,6 @@ showAllVideo = () => {
           <h4>${results} <a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h4>
           </div>
       </div>
-      <div class="single-video">
-          <video controls>
-              <source src="assets/video/news2.mp4" type="video/mp4">
-          </video>
-          <div class="video-intro">
-          <h4>${results} <a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h4>
-          </div>
       </div>`;
       });
       allVideo.after(xhtml);
