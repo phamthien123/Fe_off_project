@@ -18,16 +18,15 @@ showArticleInCategory = (categoryID) => {
         let ShowDate =  new Date(val.publish_date);
         xhtml += `<article class="blog_item" >
             <div class="blog_item_img">
-            <img class="card-img rounded-0" src="${val.thumb}" alt="">
+            <img class="card-img rounded-0" src="${val.thumb}" alt="" style="margin-top: 1px">
         </div>
         <div class="blog_details">
             <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank" >
                 <h2>${val.title}</h2>
             </a>
-            <p>${val.description}<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></p>
+            <p>${val.description}</p>
             <ul class="blog-info-link">
-                <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}</a></li> 
+                <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></a></li> 
             </ul>
         </div>
         </article>`;
@@ -41,16 +40,13 @@ showListCategories = () => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
     $.each(data, function (key, val) {
-      xhtml += `
-      <ul class="list cat-list">
-      <li>
+      xhtml += `<li>
           <a href="#" class="d-flex">
               <p><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
           </a>
-      </li>
-  </ul>`;
-    });
+      </li>`;
     List_category.html(xhtml);
+    });
   });
 };
 
@@ -93,7 +89,6 @@ showLatestArticle = (total) => {
       let xhtml = "";
       $.each(data, function (key, val) {
         let ShowDate =  new Date(val.publish_date);
-        ShowDate.toLocaleDateString();
         xhtml += `<div class="trend-top-img">
                            <img src="${val.thumb}" alt="">
                            <div class="trend-top-cap">
@@ -117,7 +112,7 @@ showRightArticle = (total) => {
       $.each(data, function (key, val) {
         let ShowDate =  new Date(val.publish_date);
         xhtml += `<div class="trend-top-img">
-            <img src="${val.thumb}" alt="">
+            <img src="${val.thumb}" alt="" class="img-right">
             <div class="trend-top-cap trend-top-cap2">
                 <span class="bgb">${val.category.name}</span>
                 <h2><a href="latest_news.html" class="titleright">${val.title}</a></h2>
@@ -236,6 +231,7 @@ showHeart = (data) => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
   $.each(data, function (key, val) {
+    let ShowDate =  new Date(val.publish_date);
     xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
       <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6">
@@ -248,9 +244,8 @@ showHeart = (data) => {
           <div class="col-xl-6 col-lg-6 col-md-6">
                 <div class="whates-caption whates-caption2">
                 <h4><a href="#" class="a_name">${val.name}</a></h4>
-                <span>${val.publish_date}<a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a>
-                </span>
                 <p>${val.description}</p>
+                <span>${ShowDate.toLocaleDateString()}<a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a></span>
          </div>
           </div>
         </div> 

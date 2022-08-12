@@ -3066,7 +3066,6 @@ hr {
   background: #fff;
   padding: 30px 20px 30px 20px;
   border-radius: 7px;
-  margin-top: 100px;
 }
 
 .whats-news-area .single-follow .single-box,
@@ -4462,9 +4461,7 @@ hr {
     padding: 30px 30px 35px 35px;
   }
 }
-.blog_details p {
-  margin-bottom: 30px;
-}
+
 .blog_details a {
   color: #ff8b23;
 }
@@ -4511,6 +4508,7 @@ hr {
 .blog_item_img {
   position: relative;
 }
+
 .blog_item_img .blog_item_date {
   position: absolute;
   bottom: -10px;
@@ -4552,7 +4550,6 @@ hr {
 }
 .blog_right_sidebar .widget_title {
   font-size: 20px;
-  margin-bottom: 40px;
 }
 .blog_right_sidebar .widget_title::after {
   content: "";
@@ -4631,7 +4628,7 @@ hr {
 .blog_right_sidebar .post_category_widget .cat-list li {
   border-bottom: 1px solid #f0e9ff;
   transition: all 0.3s ease 0s;
-  padding-bottom: 12px;
+  padding-bottom: 7px;
 }
 .blog_right_sidebar .post_category_widget .cat-list li:last-child {
   border-bottom: 0;
@@ -4645,7 +4642,7 @@ hr {
   margin-bottom: 0px;
 }
 .blog_right_sidebar .post_category_widget .cat-list li + li {
-  padding-top: 15px;
+  
 }
 .blog_right_sidebar .popular_post_widget .post_item .media-body {
   justify-content: center;
