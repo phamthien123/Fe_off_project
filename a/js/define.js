@@ -31,6 +31,8 @@ let nav_Video= $("#nav-Video");
 
 let List_category = $("#List_category");
 
+let noHeart = $("#noHeart");
+let noVideo = $("#noVideo");
 
 
 const API_PREFIX = 'http://apiforlearning.zendvn.com/api/';

@@ -1,6 +1,6 @@
 
 funcViewArticle = (id, title, thumb, link ) => {
-    let items       = [];
+    let items = [];
     items = addItem(id, title, thumb, link);
     // showArticleViewed(); 
 }
@@ -41,3 +41,5 @@ funcDeleteVideo= (id) => {
         showHeartVideo(items);
     } 
 }
+
+

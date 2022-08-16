@@ -8,11 +8,13 @@ showCategoryInMenu = () => {
   });
 };
 
+
 showArticleInCategory = (categoryID) => {
   $.getJSON(
     API_PREFIX +
       `categories_news/${categoryID}/articles?offset=0&limit=10&sort_by=id&sort_dir=desc`,
     function (data) {
+    
       let xhtml = "";
       $.each(data, function (key, val) {
         let ShowDate =  new Date(val.publish_date);
@@ -36,19 +38,21 @@ showArticleInCategory = (categoryID) => {
   );
 };
 
+
 showListCategories = () => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
     $.each(data, function (key, val) {
       xhtml += `<li>
-          <a href="#" class="d-flex">
-              <p><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
+          <a href="category.html?id=${val.id}" class="d-flex">
+              <p id="nametitel"><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
           </a>
       </li>`;
     List_category.html(xhtml);
     });
   });
 };
+
 
 showGold = () => {
   $.getJSON("http://apiforlearning.zendvn.com/api/get-gold", function (data) {
@@ -256,6 +260,13 @@ showHeart = (data) => {
   nav_tabContent.after(xhtml);
 };
 
+showErorrHeart = () => {
+  // Đổ dữ liệu ra category news
+  let xhtml = "";
+  xhtml += `<h1 style="color:red">Bạn Chưa Có Yêu Thích Tin Nào </h1>`;
+  noHeart.html(xhtml);
+};
+
 showHeartVideo = (data) => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
@@ -284,11 +295,19 @@ showHeartVideo = (data) => {
   nav_Video.after(xhtml);
 };
 
+showErorrVideo= () => {
+  // Đổ dữ liệu ra category news
+  let xhtml = "";
+  xhtml += `<h1 style="color:red">Bạn Chưa Có Yêu Thích Video Nào </h1>`;
+  noVideo.html(xhtml);
+};
+
 showvideo = () => {
   // Đổ dữ liệu ra category news
   $.getJSON(
     `http://apiforlearning.zendvn.com/api/playlists/3/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
     function (data) {
+      // let thumbnailObj = JSON.parse(val.thumbnail);
       let xhtml = "";
       $.each(data, function (key, val) {
         let title = val.title;

@@ -7,6 +7,10 @@ if(categoryID !== null) {
     showArticleInCategory(categoryID);
 }
 
+let LiscategoryID = $.urlParam('id'); 
+if(LiscategoryID !== null) {
+   showListCategories(LiscategoryID)
+}
 //Giá Vàng
 showGold();
 
@@ -22,19 +26,35 @@ showRandom(4);
 
 showCategoryDetail();
 
-showListCategories();  
-
  // Hiển thị bài viết đã xem
  let data = listItems();
  showArticleViewed(data);
 
  let data1 = listHearts();
- showHeart(data1)
+
+ if(data1 == ""){
+    showErorrHeart(data1)
+ }
+ else{
+    showHeart(data1)
+ }
+ 
+
 
  showvideo();
 
  showAllVideo();
 
-
  let video = listVideos();
- showHeartVideo(video)
+
+ if(video == ""){
+    showErorrVideo(video)
+ }
+ else{
+    showHeartVideo(video)
+ }
+ 
+
+funcSearch = () => {
+    
+}
