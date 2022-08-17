@@ -2931,7 +2931,7 @@ hr {
 .contact-section .whats-news-single .whates-caption p {
   margin-bottom: 0;
   color: #000000;
-  font-size: 16px;
+  font-size: 14px;
 }
 @media (max-width: 575px) {
   .whats-news-area .whats-news-single .whates-caption p,
@@ -3761,12 +3761,12 @@ hr {
   .weekly3-single
   .weekly3-img
   img {
-  width: 220px;
+  width: 250px;
   border-radius: 10px;
   height: 150px;
 }
-.cata-success{
-  margin: 10px;
+.abc{
+  color:green;font-size:20px
 }
 .weekly3-news-area
   .weekly3-wrapper
@@ -3775,7 +3775,7 @@ hr {
   .weekly3-caption
   h4
   a {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.3;
   display: block;

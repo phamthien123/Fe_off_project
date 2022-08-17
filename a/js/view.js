@@ -28,7 +28,9 @@ showArticleInCategory = (categoryID) => {
             </a>
             <p>${val.description}</p>
             <ul class="blog-info-link">
-                <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></a></li> 
+                <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}
+                <a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
+                '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></a></li> 
             </ul>
         </div>
         </article>`;
@@ -212,22 +214,25 @@ xhtml +=`
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
   Article_viewed.nextAll("div").remove();
-
-  let xhtml = "";
+  let valueSeen ="";
   $.each(data, function (key, val) {
-    xhtml += `<div class="weekly3-news-active dot-style d-flex" >
-      <div class="weekly3-single">
-          <div class="weekly3-img">
-              <img src="${val.thumb}" alt="">
-          </div>
-          <div class="weekly3-caption">
-              <h4><a href=" ${val.link}" target="_blank" >${val.name}</a></h4>
-              <p>19 Jan 2020</p>  
-          </div>
-          <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="post-cata cata-sm cata-success" style="color:green;font-size:20px">Xóa</a>
-  </div> 
+    valueSeen += `
+    <div class="weekly3-single">
+    <div class="weekly3-img">
+        <img src="${val.thumb}" alt="">
+    </div>
+    <div class="weekly3-caption">
+        <h4><a href=" ${val.link}" target="_blank" >${val.name}</a></h4>
+        <p>19 Jan 2020</p>  
+        <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="abc">Xóa</a> 
+    </div>
+    </div>  `
+    });
+  let xhtml = "";
+    xhtml += ` <div class="weekly3-news-active dot-style d-flex">
+          `+(valueSeen)+`
+</div>
       `;
-  });
   Article_viewed.after(xhtml);
 };
 
