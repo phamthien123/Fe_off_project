@@ -99,7 +99,7 @@ showLatestArticle = (total) => {
                            <img src="${val.thumb}" alt="">
                            <div class="trend-top-cap">
                                <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">${val.category.name}</span>
-                              <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${val.title}</a></h2>
+                              <h2><a href=" ${val.link}" target="_blank data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${val.title}</a></h2>
                                <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">${ShowDate.toLocaleDateString()}</p>
                       </div>
                   </div>`;
@@ -121,7 +121,7 @@ showRightArticle = (total) => {
             <img src="${val.thumb}" alt="" class="img-right">
             <div class="trend-top-cap trend-top-cap2">
                 <span class="bgb">${val.category.name}</span>
-                <h2><a href="latest_news.html" class="titleright">${val.title}</a></h2>
+                <h2><a href=" ${val.link}" target="_blank class="titleright">${val.title}</a></h2>
                 <p>${ShowDate.toLocaleDateString()}</p>
             </div>
         </div> `;
@@ -144,7 +144,7 @@ showRandom = (total) => {
             <img src="${val.thumb}" alt="">
         </div>
         <div class="weekly2-caption">
-            <h4><a href="#">${val.title}</a></h4>
+            <h4><a href="${val.link}">${val.title}</a></h4>
             <p>${ShowDate.toLocaleDateString()}</p>
         </div>
     </div> `;
@@ -175,7 +175,7 @@ showCategoryDetail = () => {
                               <img src="${val.thumb}" alt="">
                       </div>
                       <div class="whats-right-cap">
-                              <h4><a href="latest_news.html">${val.title}</a></h4>
+                              <h4><a href="${val.link}">${val.title}</a></h4>
                               <br/>
                               <p>${ShowDate.toLocaleDateString()}</p> 
                       </div>
@@ -192,7 +192,7 @@ xhtml +=`
                         <img src="${data[0].thumb}" alt="">
                     </div>
                     <div class="whates-caption">
-                        <h4><a href="!#">${data[0].title}</a></h4>
+                        <h4><a href="${data[0].link}">${data[0].title}</a></h4>
                         <p>${ShowDate1.toLocaleDateString()}</p> 
                         <p>${data[0].description}</p>
                     </div>
@@ -214,6 +214,8 @@ xhtml +=`
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
   Article_viewed.nextAll("div").remove();
+
+  let xhtml = "";
   let valueSeen ="";
   $.each(data, function (key, val) {
     valueSeen += `
@@ -222,19 +224,16 @@ showArticleViewed = (data) => {
         <img src="${val.thumb}" alt="">
     </div>
     <div class="weekly3-caption">
-        <h4><a href=" ${val.link}" target="_blank" >${val.name}</a></h4>
-        <p>19 Jan 2020</p>  
+        <h4><a href="${val.link}" target="_blank" >${val.name}</a></h4>
         <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="abc">Xóa</a> 
     </div>
     </div>  `
     });
-  let xhtml = "";
     xhtml += ` <div class="weekly3-news-active dot-style d-flex">
           `+(valueSeen)+`
-</div>
-      `;
+</div>`;
   Article_viewed.after(xhtml);
-};
+}
 
 showHeart = (data) => {
   // Đổ dữ liệu ra category news
@@ -254,7 +253,8 @@ showHeart = (data) => {
                 <div class="whates-caption whates-caption2">
                 <h4><a href="#" class="a_name">${val.name}</a></h4>
                 <p>${val.description}</p>
-                <span>${ShowDate.toLocaleDateString()}<a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a></span>
+                <span>${ShowDate.toLocaleDateString()}
+                <a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a></span>
          </div>
           </div>
         </div> 
