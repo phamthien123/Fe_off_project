@@ -11,6 +11,9 @@ let LiscategoryID = $.urlParam('id');
 if(LiscategoryID !== null) {
    showListCategories(LiscategoryID)
 }
+
+
+
 //Giá Vàng
 showGold();
 
@@ -20,6 +23,7 @@ showCoin();
 showLatestArticle(1); 
 
 showRightArticle(2)
+
 
 
 showRandom(4);
@@ -36,10 +40,11 @@ showCategoryDetail();
     showErorrHeart(data1)
  }
  else{
-    showHeart(data1)
+    showHeart(data1)  
  }
  
 
+ showTitle()
 
  showvideo();
 
@@ -54,7 +59,12 @@ showCategoryDetail();
     showHeartVideo(video)
  }
  
+ showSearch();
+ showSearchValue();
 
 funcSearch = () => {
-    
+  let search = $.urlParam('keyword'); 
+      if(search !== null) {
+   showSearchValue(search)
+   }
 }

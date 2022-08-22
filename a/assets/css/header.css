@@ -1,0 +1,79 @@
+.header {
+    height: 50vh;
+    background-image: 
+    linear-gradient(to right bottom, 
+   rgba(76, 216, 255, 0.8),
+   rgba(30, 108, 217, 0.8)),
+   url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-5DedxwuZoSpDwvbfr3AEKzOzk-tDTRhj9g&usqp=CAU');
+    
+    background-size: cover;
+    background-position: top;
+    position: relative;
+ 
+}
+
+.brand-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.brand { font-size: 20px; }
+
+.text-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+
+    backface-visibility: hidden;
+    margin-bottom: 30px;
+}
+
+.heading-primary-main {
+    display: block;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 60px;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 7.4px;
+}
+
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: relative;
+    left:45%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+  font-size: 14px;
+}

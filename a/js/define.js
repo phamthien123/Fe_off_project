@@ -2,6 +2,9 @@ let elmAreaCategoryNews = $("ul#category-news");
 
 let elmAreaCategoryItems = $("#list-blog-item");
 
+let SearchValue = $("#SearchValue");
+
+let searchfrom = $("#searchfrom");
 
 let elmAreaTrendingNew = $("#trending-New");
 
@@ -10,9 +13,9 @@ let trending_right = $("#trending_right");
 
 let trending_random = $("#trending_random");
 
+let title_main =$('#title_main')
 
-
-let arrCategoryInHome   = [1,5,6,12]; 
+let arrCategoryInHome   = [6,12]; 
 
 let Area_left_content = $("#Area-left-content");
 
