@@ -4,8 +4,6 @@ let elmAreaCategoryItems = $("#list-blog-item");
 
 let SearchValue = $("#SearchValue");
 
-let searchfrom = $("#searchfrom");
-
 let elmAreaTrendingNew = $("#trending-New");
 
 
@@ -19,7 +17,7 @@ let arrCategoryInHome   = [6,12];
 
 let Area_left_content = $("#Area-left-content");
 
-
+let elemInputSearch = document.getElementById("search-input");
 
 let Article_viewed = $("#Article-viewed");
 

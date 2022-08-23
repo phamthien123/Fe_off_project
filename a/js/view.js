@@ -10,54 +10,6 @@ showCategoryInMenu = () => {
   });
 };
 
-showTitle = () => {
-  $.getJSON(
-    API_PREFIX + "categories_news", function (data) {
-      let xhtml = "";
-      $.each(data, function (key, val) {  
-        xhtml += `${val.name}`;
-        console.log(val.name)
-      });
-      title_main.html(xhtml);
-    }
-  )};
-
-  showSearch = () => {
-      let xhtml = "";
-        xhtml = `<input type="text" id="search-input" placeholder="Searching key.....">
-        <a href="Search.html?q=hai" onclick="funcSearch()" style="color: white;">Tìm</a>`
-      searchfrom.html(xhtml);
-  };
-  
-  showSearchValue = (keyword) => {
-    $.getJSON(
-        `http://apiforlearning.zendvn.com/api/articles/search?q=${keyword}&offset=0&limit=2&sort_by=id&sort_dir=desc`,
-      function (data) {
-        let xhtml = "";
-        $.each(data, function (key, val) {
-          let ShowDate =  new Date(val.publish_date);
-          xhtml += `<article class="blog_item" >
-              <div class="blog_item_img">
-              <img class="card-img rounded-0" src="${val.thumb}" alt="" style="margin-top: 1px">
-          </div>
-          <div class="blog_details">
-              <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank" >
-                  <h2>${val.title}</h2>
-              </a>
-              <p>${val.description}</p>
-              <ul class="blog-info-link">
-                  <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}
-                  <a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
-                  '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a></a></li> 
-              </ul>
-          </div>
-          </article>`;
-        });
-        SearchValue.html(xhtml);
-      }
-    );
-  };
-
 
 showArticleInCategory = (categoryID) => {
   $.getJSON(
@@ -91,6 +43,40 @@ showArticleInCategory = (categoryID) => {
   );
 };
 
+showSearch = (keyword) => {
+  $.getJSON(
+   `http://apiforlearning.zendvn.com/api/articles/search?q=${keyword}&offset=0&limit=10&sort_by=id&sort_dir=desc`,
+    function (data) {
+      let xhtml = "";
+      $.each(data, function (key, val) {
+        let title = val.title.toLowerCase();
+        let description = val.description.toLowerCase();
+        title = title.replace(new RegExp(title), ``);
+        if (title.includes(" " + keyword + " ") || description.includes(" " + keyword + " ")) {
+          let btnLike = `<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
+        '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a>`
+        let ShowDate =  new Date(val.publish_date);
+        xhtml += `<article class="blog_item" >
+            <div class="blog_item_img">
+            <img class="card-img rounded-0" src="${val.thumb}" alt="" style="margin-top: 1px">
+        </div>
+        <div class="blog_details">
+            <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank" >
+            <h2>${title}</h2>
+            </a>
+            <p>${val.description}</p>
+            <ul class="blog-info-link">
+                <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}
+                `+(btnLike)+`
+                </a></li> 
+            </ul>
+        </div>
+        </article>`;
+    }})
+      SearchValue.html(xhtml);
+    }
+  );
+};
 
 showListCategories = () => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
@@ -101,8 +87,8 @@ showListCategories = () => {
               <p id="nametitel"><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
           </a>
       </li>`;
-    List_category.html(xhtml);
     });
+    List_category.html(xhtml);
   });
 };
 

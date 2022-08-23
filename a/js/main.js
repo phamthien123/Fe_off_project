@@ -12,8 +12,6 @@ if(LiscategoryID !== null) {
    showListCategories(LiscategoryID)
 }
 
-
-
 //Giá Vàng
 showGold();
 
@@ -43,9 +41,6 @@ showCategoryDetail();
     showHeart(data1)  
  }
  
-
- showTitle()
-
  showvideo();
 
  showAllVideo();
@@ -59,12 +54,27 @@ showCategoryDetail();
     showHeartVideo(video)
  }
  
- showSearch();
- showSearchValue();
 
 funcSearch = () => {
-  let search = $.urlParam('keyword'); 
-      if(search !== null) {
-   showSearchValue(search)
+   let keyword =  elemInputSearch.value;
+   if (keyword.length === 0) {
+      alert("Please Nhập từ cần tìm ");
+   }
+   else{
+      location.replace(`Search.html?keyword=${keyword}`);
    }
 }
+
+let Param = $.urlParam('keyword'); 
+showSearch(Param)
+
+   
+
+
+
+
+
+
+
+
+
