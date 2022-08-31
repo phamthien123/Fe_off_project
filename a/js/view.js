@@ -51,7 +51,6 @@ showSearch = (keyword) => {
       $.each(data, function (key, val) {
         let title = val.title.toLowerCase();
         let description = val.description.toLowerCase();
-        title = title.replace(new RegExp(title), ``);
         if (title.includes(" " + keyword + " ") || description.includes(" " + keyword + " ")) {
           let btnLike = `<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
         '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a>`
@@ -84,7 +83,7 @@ showListCategories = () => {
     $.each(data, function (key, val) {
       xhtml += `<li>
           <a href="category.html?id=${val.id}" class="d-flex">
-              <p id="nametitel"><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
+              <p class="nametitel"><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
           </a>
       </li>`;
     });
