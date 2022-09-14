@@ -57,7 +57,6 @@ addHeart = (id,name,thumb,link,publish_date,description) => {
 }
 
 deleteHeart = (id) => {
-  console.log(id);
   let items = listHearts();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
   items = items.filter(item => item.id !== id);
   saveStorageHeart(items);
@@ -98,4 +97,27 @@ deleteVideo = (id) => {
   return items;
 }
 
+
+loadStorageTitle = () => {
+  return JSON.parse(localStorage.getItem("LIST_Titles")) ;
+}
+
+saveStorageTitle = (items) => {
+  localStorage.setItem("LIST_Titles", JSON.stringify(items));
+}
+      
+listTitle = () => {
+let items = loadStorageTitle() ;
+if(items === null) items = [];  // 
+return items;
+}
+
+addTitle = (id,name) => {
+  let taskNew = {id: id, name: name};
+  let items = listVideos();
+  items.push(taskNew);
+  // Lưu item vào storgare
+  saveStorageTitle(items);
+  return items;
+}
 

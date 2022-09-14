@@ -45,7 +45,10 @@ funcDeleteVideo= (id) => {
     } 
 }
 
-
+funcLoadTile= (id, title) => {
+    let items  = [];
+    items = addTitle(id, title); 
+}
 
 
 

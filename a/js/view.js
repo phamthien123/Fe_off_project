@@ -17,8 +17,14 @@ showArticleInCategory = (categoryID) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
-        let btnLike = `<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
-        '${val.link}','${val.publish_date}','${val.description}')">Yêu Thích</a>`
+        let funclike = `onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
+         '${val.link}','${val.publish_date}','${val.description}')"`
+        let heart = `<i class="fa fa-heart" aria-hidden="true"></i>`
+        let funcDeleteLike= `<a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a>` 
+        let likedData = loadStorageHeart();
+        if(likedData.find(element => element.id == val.id)){ 
+          heart =  `${funcDeleteLike}`
+       }   
         let ShowDate =  new Date(val.publish_date);
         xhtml += `<article class="blog_item" >
             <div class="blog_item_img">
@@ -31,7 +37,7 @@ showArticleInCategory = (categoryID) => {
             <p>${val.description}</p>
             <ul class="blog-info-link">
                 <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}
-                `+(btnLike)+`
+                <a href="javascript:void(0)" ${funclike}>${heart}</a>
                 </a></li> 
             </ul>
         </div>
@@ -41,7 +47,38 @@ showArticleInCategory = (categoryID) => {
     }
   );
 };
-
+showvideo = () => {
+  // Đổ dữ liệu ra category news
+  $.getJSON(
+    `http://apiforlearning.zendvn.com/api/playlists/8/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
+    function (data) {
+      let xhtml = "";
+      $.each(data, function (key, val) {
+        let result = val.title;
+         results = result.slice(19)
+        let thumbnailObj = JSON.parse(val.thumbnail);
+       let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`
+       let video = `<i class="fa fa-heart" aria-hidden="true"></i>`
+       let funcDeleteLike= `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>` 
+       let likeVideo = loadStorageVideo();
+       if(likeVideo.find(element => element.id == val.id)){ 
+         video =  `${funcDeleteLike}`
+      }  
+        xhtml += ` 
+        <div class="col-12 col-md-3">
+            <div class="single-video-post">
+                <div class="video-post-thumb">
+                    <img src="${thumbnailObj.high.url}" alt="">
+                    <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                </div>
+                <h5><a href="#">${results}</a><a href="javascript:void(0)" ${funclikevideo}>${video}</a></h5>
+                </div>
+        </div>`;
+      });
+      video_containers.after(xhtml);
+    }
+  );
+};
 showSearch = (keyword) => {
   $.getJSON(
    `http://apiforlearning.zendvn.com/api/articles/search?q=${keyword}&offset=0&limit=10&sort_by=id&sort_dir=desc`,
@@ -81,21 +118,26 @@ showListCategories = (data) => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
     $.each(data, function (key, val) {
-      let pid = val.name;
+      letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>`
+      let tile = loadStorageTitle()
+      if (tile.find(element => element.id == val.id)){
+        letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;color:red"></i>`
+      }
       xhtml += `<li>
           <a href="category.html?id=${val.id}" class="d-flex">
-              <p><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>`+pid+`</p>
+          <p>${letTitleName}${val.name}</p>
           </a>
       </li>`;
     });
-    List_category.html(xhtml);
-  });
+    List_category.after(xhtml);
+});
 };
 
 showGold = () => {
   $.getJSON("http://apiforlearning.zendvn.com/api/get-gold", function (data) {
     let xhtml = ``;
     $.each(data, function (key, val) {
+      
       xhtml += `
               <tr>        
               <td>${val.type}</td>
@@ -108,17 +150,20 @@ showGold = () => {
 };
 
 showCoin = () => {
-  $.getJSON("http://apiforlearning.zendvn.com/api/get-coin", function (data) {
+  $.getJSON(API_PREFIX + "get-coin", function (data) {
     let xhtml = ``;
     $.each(data, function (key, val) {
-      let totalsell = val.percent_change_24h;
+      price = val.price.toFixed(2);
+      let showprice = val.percent_change_24h.toFixed(3); 
+      let classPrice = (val.percent_change_24h > 0) ? 'green' : 'red';
       xhtml += `
         <tr>        
         <td>${val.name}</td>
-        <td>${Math.round(val.price * 10000) / 100}</td>
-        <td id="totalsell">${totalsell} %</td> </tr>`;
-      $("#table-Coins").html(xhtml);
+        <td >${price }</td>
+        <td style="color:${classPrice}">${showprice}%</td> 
+        </tr>`; 
     });
+    $("#table-Coins").after(xhtml);
   });
 };
 
@@ -134,10 +179,10 @@ showLatestArticle = (total) => {
                            <img src="${val.thumb}" alt="">
                            <div class="trend-top-cap">
                                <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">${val.category.name}</span>
-                              <h2><a href=" ${val.link}" target="_blank data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${val.title}</a></h2>
-                               <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">${ShowDate.toLocaleDateString()}</p>
-                      </div>
-                  </div>`;
+                            <h2><a href=" ${val.link}" target="_blank data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${val.title}</a></h2>
+                          <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">${ShowDate.toLocaleDateString()}</p>
+                   </div>
+              </div>`;
       });
       elmAreaTrendingNew.html(xhtml);
     }
@@ -341,31 +386,7 @@ showErorrVideo= () => {
   noVideo.html(xhtml);
 };
 
-showvideo = () => {
-  // Đổ dữ liệu ra category news
-  $.getJSON(
-    `http://apiforlearning.zendvn.com/api/playlists/8/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
-    function (data) {
-      let xhtml = "";
-      $.each(data, function (key, val) {
-        let result = val.title;
-         results = result.slice(19)
-        let thumbnailObj = JSON.parse(val.thumbnail);
-        xhtml += ` 
-        <div class="col-12 col-md-3">
-            <div class="single-video-post">
-                <div class="video-post-thumb">
-                    <img src="${thumbnailObj.high.url}" alt="">
-                    <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                </div>
-                <h5><a href="#">${results}</a><a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h5>
-                </div>
-        </div>`;
-      });
-      video_containers.after(xhtml);
-    }
-  );
-};
+
 
 showAllVideo = () => {
   // Đổ dữ liệu ra category news
@@ -378,13 +399,20 @@ showAllVideo = () => {
         let iframevideo  = (val.iframe);
         let result = val.title;
         results = result.slice(19)
+        let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`
+       let video = `<i class="fa fa-heart" aria-hidden="true"></i>`
+       let funcDeleteLike= `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>` 
+       let likeVideo = loadStorageVideo();
+       if(likeVideo.find(element => element.id == val.id)){ 
+         video =  `${funcDeleteLike}`
+      }  
         xhtml += ` <div class="col-12 col-md-3">
         <div class="single-video-post">
             <div class="video-post-thumb">
                 <img src="${thumbnailObj.high.url}" alt="">
-                <a href="${thumbnailObj.high.url}" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                
             </div>
-            <h5><a href="#">${results}</a><a href="javascript:void(0)" onClick="funcLikeVideo('${val.id}', '${val.title} ')"><i class="fa-solid fa-heart"></i></a></h5>
+            <h5><a href="#">${results}</a><a href="javascript:void(0)" ${funclikevideo}>${video}</a></h5>
         </div>
     </div>`;
       });
