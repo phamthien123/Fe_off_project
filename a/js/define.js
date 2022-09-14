@@ -11,7 +11,7 @@ let trending_right = $("#trending_right");
 
 let trending_random = $("#trending_random");
 
-let title_main =$('#title_main')
+let title_list = $("#title_list");
 
 let arrCategoryInHome   = [6,12]; 
 

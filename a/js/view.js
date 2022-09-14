@@ -2,14 +2,13 @@ showCategoryInMenu = () => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
     $.each(data, function (key, val) {
-      xhtml += `<li><a href="category.html?id=${val.id}">
+      xhtml += `<li><a href="category.html?id=${val.id}" onClick="funcLoadTile('${val.id}', '${val.name} ')">
       <i class="fa-solid fa-angle-right" style="margin-right:5px"></i>
       ${val.name}</a></li>`
     });
     elmAreaCategoryNews.html(xhtml);
   });
 };
-
 
 showArticleInCategory = (categoryID) => {
   $.getJSON(
@@ -19,7 +18,7 @@ showArticleInCategory = (categoryID) => {
       let xhtml = "";
       $.each(data, function (key, val) {
         let btnLike = `<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
-        '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a>`
+        '${val.link}','${val.publish_date}','${val.description}')">Yêu Thích</a>`
         let ShowDate =  new Date(val.publish_date);
         xhtml += `<article class="blog_item" >
             <div class="blog_item_img">
@@ -55,13 +54,14 @@ showSearch = (keyword) => {
           let btnLike = `<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
         '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a>`
         let ShowDate =  new Date(val.publish_date);
+        let titleHighlight = val.title.replace(new RegExp(keyword, "ig"),"<a class='highlight'>"+keyword+"</a>");
         xhtml += `<article class="blog_item" >
             <div class="blog_item_img">
             <img class="card-img rounded-0" src="${val.thumb}" alt="" style="margin-top: 1px">
         </div>
         <div class="blog_details">
-            <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank" >
-            <h2>${title}</h2>
+            <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank">
+            `+titleHighlight+`
             </a>
             <p>${val.description}</p>
             <ul class="blog-info-link">
@@ -77,20 +77,20 @@ showSearch = (keyword) => {
   );
 };
 
-showListCategories = () => {
+showListCategories = (data) => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
     $.each(data, function (key, val) {
+      let pid = val.name;
       xhtml += `<li>
           <a href="category.html?id=${val.id}" class="d-flex">
-              <p class="nametitel"><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>
+              <p><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>`+pid+`</p>
           </a>
       </li>`;
     });
     List_category.html(xhtml);
   });
 };
-
 
 showGold = () => {
   $.getJSON("http://apiforlearning.zendvn.com/api/get-gold", function (data) {
@@ -123,7 +123,6 @@ showCoin = () => {
 };
 
 showLatestArticle = (total) => {
- 
   // Đổ dữ liệu ra category news
   $.getJSON(
     API_PREFIX + `articles?offset=5&limit=${total}&sort_by=id&sort_dir=desc`,
@@ -307,10 +306,10 @@ showErorrHeart = () => {
   noHeart.html(xhtml);
 };
 
-showHeartVideo = (data) => {
+showHeartVideo = (data1) => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
-  $.each(data, function (key, val) {
+  $.each(data1, function (key, val) {
     xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
       <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6">

@@ -85,7 +85,7 @@ addVideo = (id,name) => {
   let items = listVideos();
   items.push(taskNew);
   // Lưu item vào storgare
-  saveStorageHeart(items);
+  saveStorageVideo(items);
   return items;
 }
 
@@ -97,3 +97,5 @@ deleteVideo = (id) => {
   // xoá công việc trong items có id = id được truyền vào
   return items;
 }
+
+

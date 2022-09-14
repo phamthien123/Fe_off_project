@@ -6990,7 +6990,7 @@ button.bg-dark:hover {
 .p-4 {
   padding: 2.5rem !important;
   border-radius: 10px;
-  background-image: url("https://media.vov.vn/uploaded/vuhanh/2015_04_20/tp_hcm_123_tcch.jpg");
+  background-image: url("https://giabaogroup.vn/wp-content/uploads/2020/08/cho-ben-thanh-2.jpg");
   background-color: #cccccc;
   height: 313px;
   background-position: center;
@@ -8200,8 +8200,8 @@ a.text-dark:hover {
 .text-body {
   color: #212529 !important;
 }
-.text-muted {
-  color: black !important;
+.text-mutedtext  {
+  color:white!important;
   font-size: 20px;
   font-weight: bold;
 }

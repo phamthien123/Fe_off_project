@@ -5,10 +5,11 @@ funcViewArticle = (id, title, thumb, link ) => {
     // showArticleViewed(); 
 }
 funcDeleteArticleViewed= (id) => {
-    let text = "DELETE!\nBạn chắc chắn muốn xoá bài viết này";
+    let text = "Bạn Có Chắc Muốn Xóa";
     if (confirm(text) == true) {
         let items = deleteItem(id);
         showArticleViewed(items);
+        $.notify("Xóa Thành Công", "error"); 
     } 
 }
 
@@ -16,21 +17,35 @@ funcDeleteArticleViewed= (id) => {
 funcHeart= (id, title, thumb, link,publish_date,description) => {
     let items  = [];
     items = addHeart(id, title, thumb, link,publish_date,description);
+    $.notify("Đã Thêm Vào Yêu Thích", "success"); 
 }
 
 funcDeleteHeart= (id) => {
-    let text = "Bạn chắc chắn muốn bỏ yêu thích viết này";
+    let text = "bạn muốn xóa"
     if (confirm(text) == true) {
         let items = deleteHeart(id);
-        showHeart(items);
+        showHeart(items)
+        $.notify("Xóa Thành Công", "error"); 
     } 
+    
+   
 }
 
 funcLikeVideo= (id, title) => {
     let items  = [];
-    items = addVideo(id, title);
-    // showArticleViewed(); 
+    items = addVideo(id, title); 
+    $.notify("Đã Thêm Vào Yêu Thích", "success"); 
 }
+funcDeleteVideo= (id) => {
+    let text = "Bạn chắc chắn muốn bỏ yêu thích viết này";
+    if (confirm(text) == true) {
+        let items = deleteVideo(id);
+        showHeart(items);
+        $.notify("Xóa Thành Công", "error"); 
+    } 
+}
+
+
 
 
 

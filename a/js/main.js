@@ -6,12 +6,7 @@ let categoryID = $.urlParam('id');
 if(categoryID !== null) {
     showArticleInCategory(categoryID);
 }
-
-let LiscategoryID = $.urlParam('id'); 
-if(LiscategoryID !== null) {
-   showListCategories(LiscategoryID)
-}
-
+showListCategories()
 //Giá Vàng
 showGold();
 
@@ -21,8 +16,6 @@ showCoin();
 showLatestArticle(1); 
 
 showRightArticle(2)
-
-
 
 showRandom(4);
 
@@ -57,6 +50,7 @@ showCategoryDetail();
 
 funcSearch = () => {
    let keyword =  elemInputSearch.value;
+   
    if (keyword.length === 0) {
       alert("Please Nhập từ cần tìm ");
    }
