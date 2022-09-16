@@ -2,8 +2,9 @@
 funcViewArticle = (id, title, thumb, link ) => {
     let items = [];
     items = addItem(id, title, thumb, link);
-    // showArticleViewed(); 
+    showArticleViewed(items); 
 }
+
 funcDeleteArticleViewed= (id) => {
     let text = "Bạn Có Chắc Muốn Xóa";
     if (confirm(text) == true) {

@@ -23,7 +23,10 @@ showCategoryDetail();
 
  // Hiển thị bài viết đã xem
  let data = listItems();
- showArticleViewed(data);
+ if(data){
+   showArticleViewed(data);
+ }
+
 
  let data1 = listHearts();
 

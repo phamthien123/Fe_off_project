@@ -13,7 +13,6 @@ listItems = () => {
 }
 
 deleteItem = (id) => {
-  console.log(id);
   let items = listItems();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
   items = items.filter(item => item.id !== id);
   saveStorage(items);

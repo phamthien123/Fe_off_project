@@ -4,7 +4,7 @@ showCategoryInMenu = () => {
     $.each(data, function (key, val) {
       xhtml += `<li><a href="category.html?id=${val.id}" onClick="funcLoadTile('${val.id}', '${val.name} ')">
       <i class="fa-solid fa-angle-right" style="margin-right:5px"></i>
-      ${val.name}</a></li>`
+      ${val.name}</a></li>`;
     });
     elmAreaCategoryNews.html(xhtml);
   });
@@ -16,22 +16,30 @@ showArticleInCategory = (categoryID) => {
       `categories_news/${categoryID}/articles?offset=0&limit=10&sort_by=id&sort_dir=desc`,
     function (data) {
       let xhtml = "";
+
       $.each(data, function (key, val) {
         let funclike = `onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
-         '${val.link}','${val.publish_date}','${val.description}')"`
-        let heart = `<i class="fa fa-heart" aria-hidden="true"></i>`
-        let funcDeleteLike= `<a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a>` 
-        let likedData = loadStorageHeart();
-        if(likedData.find(element => element.id == val.id)){ 
-          heart =  `${funcDeleteLike}`
-       }   
-        let ShowDate =  new Date(val.publish_date);
+         '${val.link}','${val.publish_date}','${val.description}')"`;
+        let funcDeleteLike = `<a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a>`;
+        let heart = `<i class="fa fa-heart" aria-hidden="true"></i>`;
+        let likedData = listHearts();
+        let TestLike = likedData.find((element) => element.id == val.id);
+        if (TestLike) {
+          heart = `${funcDeleteLike}`;
+        }
+        let ShowDate = new Date(val.publish_date);
         xhtml += `<article class="blog_item" >
             <div class="blog_item_img">
-            <img class="card-img rounded-0" src="${val.thumb}" alt="" style="margin-top: 1px">
+            <img class="card-img rounded-0" src="${
+              val.thumb
+            }" alt="" style="margin-top: 1px">
         </div>
         <div class="blog_details">
-            <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank" >
+            <a class="d-inline-block" href="${
+              val.link
+            }" onClick="funcViewArticle('${val.id}', '${val.title}', '${
+          val.thumb
+        }', '${val.link}')" target="_blank" >
                 <h2>${val.title}</h2>
             </a>
             <p>${val.description}</p>
@@ -55,15 +63,15 @@ showvideo = () => {
       let xhtml = "";
       $.each(data, function (key, val) {
         let result = val.title;
-         results = result.slice(19)
+        results = result.slice(19);
         let thumbnailObj = JSON.parse(val.thumbnail);
-       let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`
-       let video = `<i class="fa fa-heart" aria-hidden="true"></i>`
-       let funcDeleteLike= `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>` 
-       let likeVideo = loadStorageVideo();
-       if(likeVideo.find(element => element.id == val.id)){ 
-         video =  `${funcDeleteLike}`
-      }  
+        let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`;
+        let video = `<i class="fa fa-heart" aria-hidden="true"></i>`;
+        let funcDeleteLike = `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>`;
+        let likeVideo = listVideos();
+        if (likeVideo.find((element) => element.id == val.id)) {
+          video = `${funcDeleteLike}`;
+        }
         xhtml += ` 
         <div class="col-12 col-md-3">
             <div class="single-video-post">
@@ -81,34 +89,46 @@ showvideo = () => {
 };
 showSearch = (keyword) => {
   $.getJSON(
-   `http://apiforlearning.zendvn.com/api/articles/search?q=${keyword}&offset=0&limit=10&sort_by=id&sort_dir=desc`,
+    `http://apiforlearning.zendvn.com/api/articles/search?q=${keyword}&offset=0&limit=10&sort_by=id&sort_dir=desc`,
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
         let title = val.title.toLowerCase();
         let description = val.description.toLowerCase();
-        if (title.includes(" " + keyword + " ") || description.includes(" " + keyword + " ")) {
+        if (
+          title.includes(" " + keyword + " ") ||
+          description.includes(" " + keyword + " ")
+        ) {
           let btnLike = `<a href="#" class="btn1" onClick="funcHeart('${val.id}', '${val.title}', '${val.thumb}', 
-        '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a>`
-        let ShowDate =  new Date(val.publish_date);
-        let titleHighlight = val.title.replace(new RegExp(keyword, "ig"),"<a class='highlight'>"+keyword+"</a>");
-        xhtml += `<article class="blog_item" >
+        '${val.link}','${val.publish_date}','${val.description}')">Yêu thích</a>`;
+          let ShowDate = new Date(val.publish_date);
+          let titleHighlight = val.title.replace(
+            new RegExp(keyword, "ig"),
+            "<a class='highlight'>" + keyword + "</a>"
+          );
+          xhtml +=
+            `<article class="blog_item" >
             <div class="blog_item_img">
             <img class="card-img rounded-0" src="${val.thumb}" alt="" style="margin-top: 1px">
         </div>
         <div class="blog_details">
             <a class="d-inline-block" href="${val.link}" onClick="funcViewArticle('${val.id}', '${val.title}', '${val.thumb}', '${val.link}')" target="_blank">
-            `+titleHighlight+`
+            ` +
+            titleHighlight +
+            `
             </a>
             <p>${val.description}</p>
             <ul class="blog-info-link">
                 <li><a href="#"><i class="fa fa-calendar-check"></i>${ShowDate.toLocaleDateString()}
-                `+(btnLike)+`
+                ` +
+            btnLike +
+            `
                 </a></li> 
             </ul>
         </div>
         </article>`;
-    }})
+        }
+      });
       SearchValue.html(xhtml);
     }
   );
@@ -118,10 +138,10 @@ showListCategories = (data) => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
     $.each(data, function (key, val) {
-      letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>`
-      let tile = loadStorageTitle()
-      if (tile.find(element => element.id == val.id)){
-        letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;color:red"></i>`
+      letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>`;
+      let tile = listTitle();
+      if (tile.find((element) => element.id == val.id)) {
+        letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;color:red"></i>`;
       }
       xhtml += `<li>
           <a href="category.html?id=${val.id}" class="d-flex">
@@ -130,14 +150,13 @@ showListCategories = (data) => {
       </li>`;
     });
     List_category.after(xhtml);
-});
+  });
 };
 
 showGold = () => {
   $.getJSON("http://apiforlearning.zendvn.com/api/get-gold", function (data) {
     let xhtml = ``;
     $.each(data, function (key, val) {
-      
       xhtml += `
               <tr>        
               <td>${val.type}</td>
@@ -154,14 +173,14 @@ showCoin = () => {
     let xhtml = ``;
     $.each(data, function (key, val) {
       price = val.price.toFixed(2);
-      let showprice = val.percent_change_24h.toFixed(3); 
-      let classPrice = (val.percent_change_24h > 0) ? 'green' : 'red';
+      let showprice = val.percent_change_24h.toFixed(3);
+      let classPrice = val.percent_change_24h > 0 ? "green" : "red";
       xhtml += `
         <tr>        
         <td>${val.name}</td>
-        <td >${price }</td>
+        <td >${price}</td>
         <td style="color:${classPrice}">${showprice}%</td> 
-        </tr>`; 
+        </tr>`;
     });
     $("#table-Coins").after(xhtml);
   });
@@ -174,12 +193,18 @@ showLatestArticle = (total) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
-        let ShowDate =  new Date(val.publish_date);
+        let ShowDate = new Date(val.publish_date);
         xhtml += `<div class="trend-top-img">
                            <img src="${val.thumb}" alt="">
                            <div class="trend-top-cap">
-                               <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">${val.category.name}</span>
-                            <h2><a href=" ${val.link}" target="_blank data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${val.title}</a></h2>
+                               <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">${
+                                 val.category.name
+                               }</span>
+                            <h2><a href=" ${
+                              val.link
+                            }" target="_blank data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">${
+          val.title
+        }</a></h2>
                           <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">${ShowDate.toLocaleDateString()}</p>
                    </div>
               </div>`;
@@ -196,12 +221,14 @@ showRightArticle = (total) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
-        let ShowDate =  new Date(val.publish_date);
+        let ShowDate = new Date(val.publish_date);
         xhtml += `<div class="trend-top-img">
             <img src="${val.thumb}" alt="" class="img-right">
             <div class="trend-top-cap trend-top-cap2">
                 <span class="bgb">${val.category.name}</span>
-                <h2><a href=" ${val.link}" target="_blank class="titleright">${val.title}</a></h2>
+                <h2><a href=" ${val.link}" target="_blank class="titleright">${
+          val.title
+        }</a></h2>
                 <p>${ShowDate.toLocaleDateString()}</p>
             </div>
         </div> `;
@@ -218,7 +245,7 @@ showRandom = (total) => {
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
-        let ShowDate =  new Date(val.publish_date);
+        let ShowDate = new Date(val.publish_date);
         xhtml += `  <div class="weekly2-single">
         <div class="weekly2-img">
             <img src="${val.thumb}" alt="">
@@ -245,9 +272,9 @@ showCategoryDetail = () => {
         <h3>${data[0].category.name}</h3>
     </div>
      `;
-     let aricalRight ="";
+        let aricalRight = "";
         $.each(data, function (key, val) {
-          let ShowDate =  new Date(val.publish_date);
+          let ShowDate = new Date(val.publish_date);
           aricalRight += `
             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
                 <div class="whats-right-single mb-20">
@@ -261,9 +288,10 @@ showCategoryDetail = () => {
                       </div>
                   </div>
             </div>`;
-});
-let ShowDate1 =  new Date(data[0].publish_date);
-xhtml +=`
+        });
+        let ShowDate1 = new Date(data[0].publish_date);
+        xhtml +=
+          `
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
           <div class="row">
             <div class="col-xl-6 col-lg-12">
@@ -280,23 +308,28 @@ xhtml +=`
             </div>
             <div class="col-xl-6 col-lg-12">
                     <div class="row">
-            `+(aricalRight)+`
+            ` +
+          aricalRight +
+          `
             </div>
             </div>
           </div>
         </div>`;
-                Area_left_content.after(xhtml);
-              }
-            );
-          });
-        };
+        Area_left_content.after(xhtml);
+      }
+    );
+  });
+};
 showArticleViewed = (data) => {
   // Đổ dữ liệu ra category news
   Article_viewed.nextAll("div").remove();
-
   let xhtml = "";
-  let valueSeen ="";
+  let valueSeen = "";
+  let TitleTin = "";
   $.each(data, function (key, val) {
+    if (val.id) {
+      TitleTin = "<h3> Tin đã Xem</h3>";
+    }
     valueSeen += `
     <div class="weekly3-single">
     <div class="weekly3-img">
@@ -306,19 +339,23 @@ showArticleViewed = (data) => {
         <h4><a href="${val.link}" target="_blank" >${val.name}</a></h4>
         <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="abc">Xóa</a> 
     </div>
-    </div>  `
-    });
-    xhtml += ` <div class="weekly3-news-active dot-style d-flex">
-          `+(valueSeen)+`
-</div>`;
+    </div>  `;
+  });
+  xhtml +=
+    TitleTin +
+    `<div class="weekly3-news-active dot-style d-flex">
+          ` +
+    valueSeen +
+    `
+    </div>`;
   Article_viewed.after(xhtml);
-}
+};
 
 showHeart = (data) => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
   $.each(data, function (key, val) {
-    let ShowDate =  new Date(val.publish_date);
+    let ShowDate = new Date(val.publish_date);
     xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
       <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6">
@@ -333,7 +370,9 @@ showHeart = (data) => {
                 <h4><a href="#" class="a_name">${val.name}</a></h4>
                 <p>${val.description}</p>
                 <span>${ShowDate.toLocaleDateString()}
-                <a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${val.id}')">Bỏ Thích</a></span>
+                <a href="javascript:void(0)" class="btn1" onClick="funcDeleteHeart('${
+                  val.id
+                }')">Bỏ Thích</a></span>
          </div>
           </div>
         </div> 
@@ -351,10 +390,10 @@ showErorrHeart = () => {
   noHeart.html(xhtml);
 };
 
-showHeartVideo = (data1) => {
+showHeartVideo = (data1 ) => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
-  $.each(data1, function (key, val) {
+  $.each(data, function (key, val) {
     xhtml += `<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">       
       <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-6">
@@ -379,14 +418,12 @@ showHeartVideo = (data1) => {
   nav_Video.after(xhtml);
 };
 
-showErorrVideo= () => {
+showErorrVideo = () => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
   xhtml += `<h1 style="color:red">Bạn Chưa Có Yêu Thích Video Nào </h1>`;
   noVideo.html(xhtml);
 };
-
-
 
 showAllVideo = () => {
   // Đổ dữ liệu ra category news
@@ -396,16 +433,15 @@ showAllVideo = () => {
       let xhtml = "";
       $.each(data, function (key, val) {
         let thumbnailObj = JSON.parse(val.thumbnail);
-        let iframevideo  = (val.iframe);
         let result = val.title;
-        results = result.slice(19)
-        let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`
-       let video = `<i class="fa fa-heart" aria-hidden="true"></i>`
-       let funcDeleteLike= `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>` 
-       let likeVideo = loadStorageVideo();
-       if(likeVideo.find(element => element.id == val.id)){ 
-         video =  `${funcDeleteLike}`
-      }  
+        results = result.slice(19);
+        let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`;
+        let video = `<i class="fa fa-heart" aria-hidden="true"></i>`;
+        let funcDeleteLike = `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>`;
+        let likeVideo = listVideos();
+        if (likeVideo.find((element) => element.id == val.id)) {
+          video = `${funcDeleteLike}`;
+        }
         xhtml += ` <div class="col-12 col-md-3">
         <div class="single-video-post">
             <div class="video-post-thumb">
@@ -420,4 +456,3 @@ showAllVideo = () => {
     }
   );
 };
-
