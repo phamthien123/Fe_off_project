@@ -236,13 +236,19 @@ a {
 a:hover {
   color: red;
 }
+.plist{
+  color: red;
+  font-weight: bold;
+}
 a:focus,
 a:hover,
 .portfolio-cat a:hover,
 .footer -menu li a:hover {
   text-decoration: none;
 }
-
+.container-backgruop{
+  background-color: #e5e7eb;
+}
 a,
 button {
   color: black;
@@ -2251,7 +2257,7 @@ hr {
   background: #f4f4f4;
 }
 .gray-bg {
-  background: #f4f4f4;
+  background: white;
 }
 .white-bg {
   background: #fff;
@@ -3066,9 +3072,10 @@ hr {
 .whats-news-area .single-follow,
 .about-area2 .single-follow,
 .contact-section .single-follow {
-  background: #fff;
+  background: #fafafa;
   padding: 30px 20px 30px 20px;
   border-radius: 7px;
+  width: 105%;
 }
 
 .whats-news-area .single-follow .single-box,
@@ -3468,13 +3475,12 @@ hr {
   transition: all 0.6s ease-out 0s;
 }
 .weekly2-news-area .weekly2-wrapper .slider-wrapper {
-  background: #fff;
-  padding: 30px 22px 19px 10px;
+  background: #fafaf9;
+  padding: 30px 22px 42px 10px;
   border-radius: 10px;
 }
 .weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single {
   margin-left: 15px;
-  margin-right: 15px;
 }
 .weekly2-news-area
   .weekly2-wrapper
@@ -3616,6 +3622,9 @@ hr {
 .highlight{
   color: red !important;
   font-size: 30px !important;
+}
+.highlight1{
+  color: red !important;
 }
 .recent-articles .single-recent {
   position: relative;

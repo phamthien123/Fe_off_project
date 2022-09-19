@@ -55,38 +55,7 @@ showArticleInCategory = (categoryID) => {
     }
   );
 };
-showvideo = () => {
-  // Đổ dữ liệu ra category news
-  $.getJSON(
-    `http://apiforlearning.zendvn.com/api/playlists/8/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
-    function (data) {
-      let xhtml = "";
-      $.each(data, function (key, val) {
-        let result = val.title;
-        results = result.slice(19);
-        let thumbnailObj = JSON.parse(val.thumbnail);
-        let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`;
-        let video = `<i class="fa fa-heart" aria-hidden="true"></i>`;
-        let funcDeleteLike = `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>`;
-        let likeVideo = listVideos();
-        if (likeVideo.find((element) => element.id == val.id)) {
-          video = `${funcDeleteLike}`;
-        }
-        xhtml += ` 
-        <div class="col-12 col-md-3">
-            <div class="single-video-post">
-                <div class="video-post-thumb">
-                    <img src="${thumbnailObj.high.url}" alt="">
-                    <a href="https://youtu.be/dIyXl9ZHEgg" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                </div>
-                <h5><a href="#">${results}</a><a href="javascript:void(0)" ${funclikevideo}>${video}</a></h5>
-                </div>
-        </div>`;
-      });
-      video_containers.after(xhtml);
-    }
-  );
-};
+
 showSearch = (keyword) => {
   $.getJSON(
     `http://apiforlearning.zendvn.com/api/articles/search?q=${keyword}&offset=0&limit=10&sort_by=id&sort_dir=desc`,
@@ -129,29 +98,42 @@ showSearch = (keyword) => {
         </article>`;
         }
       });
-      SearchValue.html(xhtml);
+      SearchValue.after(xhtml);
     }
   );
 };
 
-showListCategories = (data) => {
+showListCategories = () => {
   $.getJSON(API_PREFIX + "categories_news", function (data) {
     let xhtml = "";
-    $.each(data, function (key, val) {
-      letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>`;
+    $.each(data, function (key, val) {  
+      letTitleName = `<p><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>`
       let tile = listTitle();
       if (tile.find((element) => element.id == val.id)) {
-        letTitleName = `<i class="fa-solid fa-angle-right" style="margin-right:5px;color:red"></i>`;
+        letTitleName = `<p class="plist"><i class="fa-solid fa-angle-right" style="margin-right:5px;"></i>${val.name}</p>`;
       }
-      xhtml += `<li>
+      xhtml +=  `<li>
           <a href="category.html?id=${val.id}" class="d-flex">
-          <p>${letTitleName}${val.name}</p>
+          <p>${letTitleName}</p>
           </a>
       </li>`;
     });
     List_category.after(xhtml);
   });
 };
+
+showListTitle = (title) => {
+    let xhtml = "";
+    $.each(title, function (key, val) {  
+      let title = listTitle();
+      if (title.find((element) => element.id == val.id)) {
+        letTitleName = `${val.name}`;
+      }
+      xhtml +=  `${letTitleName}`;
+      console.log(letTitleName);
+    });
+    elmTitle.html(xhtml);
+  }
 
 showGold = () => {
   $.getJSON("http://apiforlearning.zendvn.com/api/get-gold", function (data) {
@@ -328,14 +310,14 @@ showArticleViewed = (data) => {
   let TitleTin = "";
   $.each(data, function (key, val) {
     if (val.id) {
-      TitleTin = "<h3> Tin đã Xem</h3>";
+      TitleTin = '<h3 style="color: red;margin-top: 10px;font-size: 40px;font-weight: 700;margin-left: 15px;"> Tin Đã Xem</h3>';
     }
     valueSeen += `
     <div class="weekly3-single">
     <div class="weekly3-img">
         <img src="${val.thumb}" alt="" class="imgSeen">
     </div>
-    <div class="weekly3-caption">
+    <div class="weekly3-caption" style="padding-bottom: 40px">
         <h4><a href="${val.link}" target="_blank" >${val.name}</a></h4>
         <a href="javascript:void(0)" onClick="funcDeleteArticleViewed('${val.id}')" class="abc">Xóa</a> 
     </div>
@@ -390,7 +372,41 @@ showErorrHeart = () => {
   noHeart.html(xhtml);
 };
 
-showHeartVideo = (data1 ) => {
+showvideo = () => {
+  // Đổ dữ liệu ra category news
+  $.getJSON(
+    `http://apiforlearning.zendvn.com/api/playlists/8/videos?offset=0&limit=4&sort_by=id&sort_dir=asc`,
+    function (data) {
+      let xhtml = "";
+      $.each(data, function (key, val) {
+        let result = val.title;
+        results = result.slice(19);
+        let thumbnailObj = JSON.parse(val.thumbnail);
+        let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`;
+        let video = `<i class="fa fa-heart" aria-hidden="true"></i>`;
+        let funcDeleteLike = `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>`;
+        let likeVideo = listVideos();
+        if (likeVideo.find((element) => element.id == val.id)) {
+          video = `${funcDeleteLike}`;
+        }
+        xhtml += ` 
+        <div class="col-12 col-md-3">
+            <div class="single-video-post">
+                <div class="video-post-thumb">
+                    <img src="${thumbnailObj.high.url}" alt="">
+                    <a href="https://www.youtube.com/embed/${val.youtube_id}" class="videobtn" target="_blank"><i class="fa fa-play" aria-hidden="true"></i></a>
+                </div>
+                <h5><a href="https://www.youtube.com/embed/${val.youtube_id}" target="_blank">${results}</a><a href="javascript:void(0)" ${funclikevideo}>${video}</a></h5>
+                </div>
+        </div>`;
+      });
+      video_containers.after(xhtml);
+    }
+  );
+};
+
+
+showHeartVideo = (data) => {
   // Đổ dữ liệu ra category news
   let xhtml = "";
   $.each(data, function (key, val) {
@@ -399,7 +415,7 @@ showHeartVideo = (data1 ) => {
           <div class="col-xl-6 col-lg-6 col-md-6">
               <div class="whats-news-single mb-40 mb-40">
                   <div class="whates-img">
-                      <img src="${val.thumb}"alt="" class="img-res">
+                      <img src="${val.thumbnailObj}"alt="" class="img-res">
                   </div>
               </div>
           </div>
@@ -425,16 +441,16 @@ showErorrVideo = () => {
   noVideo.html(xhtml);
 };
 
-showAllVideo = () => {
+showAllvideo = () => {
   // Đổ dữ liệu ra category news
   $.getJSON(
     `http://apiforlearning.zendvn.com/api/playlists/8/videos?offset=0&limit=16&sort_by=id&sort_dir=asc`,
     function (data) {
       let xhtml = "";
       $.each(data, function (key, val) {
-        let thumbnailObj = JSON.parse(val.thumbnail);
         let result = val.title;
         results = result.slice(19);
+        let thumbnailObj = JSON.parse(val.thumbnail);
         let funclikevideo = `onClick="funcLikeVideo('${val.id}', '${val.title}')"`;
         let video = `<i class="fa fa-heart" aria-hidden="true"></i>`;
         let funcDeleteLike = `<a href="javascript:void(0)" onClick="funcDeleteVideo('${val.id}')"><i class="fa fa-heart" style="color: red;" aria-hidden="true"></i></a>`;
@@ -442,17 +458,18 @@ showAllVideo = () => {
         if (likeVideo.find((element) => element.id == val.id)) {
           video = `${funcDeleteLike}`;
         }
-        xhtml += ` <div class="col-12 col-md-3">
-        <div class="single-video-post">
-            <div class="video-post-thumb">
-                <img src="${thumbnailObj.high.url}" alt="">
-                
-            </div>
-            <h5><a href="#">${results}</a><a href="javascript:void(0)" ${funclikevideo}>${video}</a></h5>
-        </div>
-    </div>`;
-      });
-      allVideo.after(xhtml);
+        xhtml += ` 
+        <div class="col-12 col-md-3">
+            <div class="single-video-post">
+                <div class="video-post-thumb">
+                    <img src="${thumbnailObj.high.url}" alt="">
+                    <a href="https://www.youtube.com/embed/${val.youtube_id}" class="videobtn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                </div>
+                <h5><a href="https://www.youtube.com/embed/${val.youtube_id}">${results}</a><a href="javascript:void(0)" ${funclikevideo}>${video}</a></h5>
+                </div>
+        </div>`;
+    });
+      video_All.after(xhtml);
     }
   );
 };

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
-    <title>Tin Tức</title>
+    <title id="elmTitle"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/aaaa-removebg-preview.png">
@@ -123,26 +123,6 @@
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar" id="list-blog-item">       
     <!--================End Blog Area =================-->
-                        <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -154,14 +134,14 @@
                             </ul>
                          </aside>  
             
-                        <div class="single-follow mb-30 mt-30">
+                         <div class="single-follow mb-45">
                             <div class="single-box">
-                                <h2 style="color:#fde047;">Bảng Giá Vàng</h2>
+                                <h2 style="color:#22d3ee;">Bảng Giá Vàng</h2>
                                 <table>
                                     <tr>
-                                    <th>Tên Coins</th>
-                                    <th>Giá Coins</th>
-                                    <th>Giá Thay Đổi</th>
+                                    <th>Tên Vàng</th>
+                                    <th>Mua Vào</th>
+                                    <th>Bán Ra</th>
                                     </tr>
                                     <tbody id="table-api">
                                
@@ -171,7 +151,7 @@
                         </div>
                         <div class="single-follow mb-45">
                             <div class="single-box">
-                                <h2 style="color:#f97316;">Bảng Giá Coins</h2>
+                                <h2 style="color:#4ade80;">Bảng Giá Coins</h2>
                                 <table>
                                     <tr>
                                     <th>Tên Coins</th>
@@ -277,8 +257,10 @@
     <div class="search-model-box">
         <div class="d-flex align-items-center h-100 justify-content-center">
             <div class="search-close-btn">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Searching key.....">
+            <form class="search-model-form" id="searchfrom">  
+            <input type="text" id="search-input"  placeholder="Searching key.....">
+            <button  type="button" style="color: black;padding: 15px 15px 10px 15px;border-radius: 10px;
+            background-color: orange;" onclick="funcSearch()">Tìm</button>   
             </form>
         </div>
     </div>

@@ -6,6 +6,7 @@ let SearchValue = $("#SearchValue");
 
 let elmAreaTrendingNew = $("#trending-New");
 
+let elmTitle = $("#elmTitle");
 
 let trending_right = $("#trending_right");
 
@@ -25,7 +26,7 @@ let video_containers= $("#video-containers");
 
 let nav_tabContent= $("#nav_tabContent");
 
-let allVideo= $("#allVideo");
+let video_All= $("#video_All");
 
 
 let nav_Video= $("#nav-Video");

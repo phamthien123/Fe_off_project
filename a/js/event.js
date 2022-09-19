@@ -18,6 +18,7 @@ funcDeleteArticleViewed= (id) => {
 funcHeart= (id, title, thumb, link,publish_date,description) => {
     let items  = [];
     items = addHeart(id, title, thumb, link,publish_date,description);
+    showArticleViewed();  
     $.notify("Đã Thêm Vào Yêu Thích", "success"); 
 }
 
@@ -26,7 +27,8 @@ funcDeleteHeart= (id) => {
     if (confirm(text) == true) {
         let items = deleteHeart(id);
         showHeart(items)
-        $.notify("Xóa Thành Công", "error"); 
+        $.notify("Xóa Thành Công", "error");
+       
     } 
     
    

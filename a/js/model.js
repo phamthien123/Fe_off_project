@@ -6,12 +6,19 @@ saveStorage = (items) => {
     localStorage.setItem("LIST_TASK", JSON.stringify(items));
 }
         
-listItems = () => {
-  let items = loadStorage() ;
+listItems = (name) => {
+  let items = loadStorage(name) ;
   if(items === null) items = [];  // 
   return items;
 }
-
+addItem = (id,name,thumb,link) => {
+  let taskNew = {id: id, name: name,thumb:thumb ,link: link};
+  let items = listItems();
+  items.push(taskNew);
+  // Lưu item vào storgare
+  saveStorage(items);
+  return items;
+}
 deleteItem = (id) => {
   let items = listItems();  // [ {id,name,level}, {id,name,level}, {id,name,level}]
   items = items.filter(item => item.id !== id);
@@ -20,14 +27,7 @@ deleteItem = (id) => {
   return items;
 }
 
-addItem = (id,name,thumb,link) => {
-    let taskNew = {id: id, name: name,thumb:thumb ,link: link,};
-    let items = listItems();
-    items.push(taskNew);
-    // Lưu item vào storgare
-    saveStorage(items);
-    return items;
-}
+
 
 
 ///Load Yêu Thích

@@ -147,14 +147,14 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
             
-                        <div class="single-follow mb-30 mt-30">
+                        <div class="single-follow mb-45">
                             <div class="single-box">
-                                <h2 style="color:#fde047;">Bảng Giá Vàng</h2>
+                                <h2 style="color:#22d3ee;">Bảng Giá Vàng</h2>
                                 <table>
                                     <tr>
-                                    <th>Tên Coins</th>
-                                    <th>Giá Coins</th>
-                                    <th>Giá Thay Đổi</th>
+                                    <th>Tên Vàng</th>
+                                    <th>Mua Vào</th>
+                                    <th>Bán Ra</th>
                                     </tr>
                                     <tbody id="table-api">
                                
@@ -164,7 +164,7 @@
                         </div>
                         <div class="single-follow mb-45">
                             <div class="single-box">
-                                <h2 style="color:#f97316;">Bảng Giá Coins</h2>
+                                <h2 style="color:#4ade80;">Bảng Giá Coins</h2>
                                 <table>
                                     <tr>
                                     <th>Tên Coins</th>
@@ -270,8 +270,10 @@
     <div class="search-model-box">
         <div class="d-flex align-items-center h-100 justify-content-center">
             <div class="search-close-btn">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Searching key.....">
+            <form class="search-model-form" id="searchfrom">  
+            <input type="text" id="search-input"  placeholder="Searching key.....">
+            <button  type="button" style="color: black;padding: 15px 15px 10px 15px;border-radius: 10px;
+            background-color: orange;" onclick="funcSearch()">Tìm</button>   
             </form>
         </div>
     </div>

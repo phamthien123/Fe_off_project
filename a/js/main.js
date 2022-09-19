@@ -3,9 +3,13 @@ showCategoryInMenu();
 
 //ArticleInCategory
 let categoryID = $.urlParam('id'); 
+
 if(categoryID !== null) {
     showArticleInCategory(categoryID);
 }
+
+showAllvideo();
+
 showListCategories()
 //Giá Vàng
 showGold();
@@ -22,11 +26,12 @@ showRandom(4);
 showCategoryDetail();
 
  // Hiển thị bài viết đã xem
- let data = listItems();
- if(data){
-   showArticleViewed(data);
- }
+let data = listItems();
+showArticleViewed(data);
 
+
+ let title = listTitle();
+showListTitle(title);
 
  let data1 = listHearts();
 
@@ -39,7 +44,8 @@ showCategoryDetail();
  
  showvideo();
 
- showAllVideo();
+
+
 
  let video = listVideos();
 
